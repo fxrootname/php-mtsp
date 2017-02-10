@@ -2,6 +2,7 @@
 namespace DigitalVirgo\MTSP\Service;
 
 use DigitalVirgo\MTSP\Model\Service;
+use DigitalVirgo\MTSP\Model\Services;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Stream\Stream;
 
@@ -152,21 +153,25 @@ class Client extends GuzzleClient {
 
     /**
      * Get Services in xml format
-     * @return string
+     * @return Services
      */
     public function getServices() {
-        return $this->_request('services');
+        return (new Services())
+            ->fromXml(
+                $this->_request("services")
+            );
     }
 
     /**
      * @param $serviceName Service name
-     * @return string
+     * @return Service
      */
     public function getService($serviceName) {
 
-        $xml = $this->_request("services/{$serviceName}");
-
-        return (new Service())->fromXml($xml);
+        return (new Service())
+            ->fromXml(
+                $this->_request("services/{$serviceName}")
+            );
     }
 
     /**

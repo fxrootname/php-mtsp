@@ -74,39 +74,52 @@ abstract class ModelAbstract
                     $root->appendChild($dom->importNode($element->toDomElement(), true));
                     //should be simple element
                 } else {
-                    $type = gettype($element);
 
-                    if ($type == 'object') {
-                        $type = get_class($element);
-                    }
+                    $this->_appendElement($name, $element, $dom, $root);
 
-                    switch ($type) {
-                        case "integer":
-                        case "string":
-                        case "double":
-                            //do nonthing
-                            break;
-                        case "boolean":
-                            $element = $element ? 'true' : 'false';
-                            break;
-                        case "DateTime":
-                            $element = $element->format('c');
-                            break;
-                        case "unknown type":
-                        case "resource":
-                        case "array":
-                        default:
-                            throw new \Exception("Unsupported type/class {$type}");
-                            break;
-                    }
-
-                    $field = $dom->createElement($name, $element);
-                    $root->appendChild($field);
                 }
             }
         }
         return $root;
     }
+
+    protected function _appendElement($name, $element, \DOMDocument $dom, $root)
+    {
+        $type = gettype($element);
+
+        if ($type == 'object') {
+            $type = get_class($element);
+        }
+
+        switch ($type) {
+            case "integer":
+            case "string":
+            case "double":
+                //do nonthing
+                break;
+            case "boolean":
+                $element = $element ? 'true' : 'false';
+                break;
+            case "DateTime":
+                $element = $element->format('c');
+                break;
+            case "array":
+                foreach ($element as $subElement) {
+                    $this->_appendElement($name, $subElement, $dom, $root);
+                }
+                return;
+                break;
+            case "unknown type":
+            case "resource":
+            default:
+                throw new \Exception("Unsupported type/class {$type}");
+                break;
+        }
+
+        $field = $dom->createElement($name, $element);
+        $root->appendChild($field);
+    }
+
     /**
      * Convert object info XML string
      * @return string xml
