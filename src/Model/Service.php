@@ -61,7 +61,7 @@ class Service extends ModelAbstract
     }
 
     /**
-     * @param boolean $active
+     * @param boolean|string $active
      * @return Service
      */
     public function setActive($active)
@@ -215,6 +215,7 @@ class Service extends ModelAbstract
     /**
      * @param string $serviceType
      * @return Service
+     * @throws \Exception
      */
     public function setServiceType($serviceType)
     {

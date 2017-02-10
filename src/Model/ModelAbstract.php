@@ -22,6 +22,7 @@ abstract class ModelAbstract
             $this->setData($params);
         }
     }
+
     /**
      * Set class data using setters methods
      * @param array $params
@@ -37,11 +38,13 @@ abstract class ModelAbstract
             }
         }
     }
+
     /**
      * Return array structure od DOM document
      * @return array
      */
     protected abstract function _getDomMap();
+
     /**
      * Convert object into DOMElement based on _getDomMap method
      *
@@ -69,67 +72,95 @@ abstract class ModelAbstract
             }
             // check is element is set
             if ($element !== null) {
-                //should be DomElement
-                if ($element instanceof ModelAbstract) {
-                    $root->appendChild($dom->importNode($element->toDomElement(), true));
-                    //should be simple element
-                } else {
 
-                    $this->_appendElement($name, $element, $dom, $root);
+                $this->_appendElement($name, $element, $dom, $root);
 
-                }
+
             }
         }
         return $root;
     }
 
-    protected function _appendElement($name, $element, \DOMDocument $dom, $root)
+    /**
+     * Converts basic type to string and append it to DomElement
+     * @param $name
+     * @param $element
+     * @param \DOMDocument $dom
+     * @param $root
+     * @throws \Exception
+     */
+    protected function _appendElement($name, $element, \DOMDocument $dom, \DOMElement $root)
     {
-        $type = gettype($element);
 
-        if ($type == 'object') {
-            $type = get_class($element);
+        //should be DomElement
+        if ($element instanceof ModelAbstract) {
+            $root->appendChild($dom->importNode($element->toDomElement(), true));
+
+            //should be simple element
+        } else {
+            $type = gettype($element);
+
+            if ($type == 'object') {
+                $type = get_class($element);
+            }
+
+            switch ($type) {
+                case "integer":
+                case "string":
+                case "double":
+                    //do nonthing
+                    break;
+                case "boolean":
+                    $element = $element ? 'true' : 'false';
+                    break;
+                case "DateTime":
+                    $element = $element->format('c');
+                    break;
+                case "array":
+                    foreach ($element as $subElement) {
+                        $this->_appendElement($name, $subElement, $dom, $root);
+                    }
+                    return;
+                    break;
+                case "unknown type":
+                case "resource":
+                default:
+                    throw new \Exception("Unsupported type/class {$type}");
+                    break;
+            }
+
+            $field = $dom->createElement($name, $element);
+            $root->appendChild($field);
         }
-
-        switch ($type) {
-            case "integer":
-            case "string":
-            case "double":
-                //do nonthing
-                break;
-            case "boolean":
-                $element = $element ? 'true' : 'false';
-                break;
-            case "DateTime":
-                $element = $element->format('c');
-                break;
-            case "array":
-                foreach ($element as $subElement) {
-                    $this->_appendElement($name, $subElement, $dom, $root);
-                }
-                return;
-                break;
-            case "unknown type":
-            case "resource":
-            default:
-                throw new \Exception("Unsupported type/class {$type}");
-                break;
-        }
-
-        $field = $dom->createElement($name, $element);
-        $root->appendChild($field);
     }
 
     /**
      * Convert object info XML string
+     * @param bool $prettyFormat Render Xml with new lines and indentation, default false
      * @return string xml
      */
-    public function toXml()
+    public function toXml($prettyFormat = false)
     {
         $xml = new \DOMDocument();
         $xml->appendChild($xml->importNode($this->toDomElement(), true));
+
+        if ($prettyFormat) {
+            $xml->preserveWhiteSpace = false;
+            $xml->formatOutput = true;
+        }
+
         return $xml->saveXML();
     }
+
+    /**
+     * Alias for toXml
+     * @see toXml
+     */
+    public function __toString()
+    {
+        return $this->toXml(true);
+    }
+
     /**
      * Set object parameters by xml string
      * @param $xml string
@@ -140,22 +171,33 @@ abstract class ModelAbstract
         if (is_string($xml)) {
             $xml = new \SimpleXMLElement($xml);
         }
+
         $map = $this->_getDomMap();
         $map = reset($map);
         //cast xml to array
-        $xml = json_decode(json_encode((array) $xml), 1);
+        $xml = json_decode(json_encode((array)$xml), 1);
         foreach ($xml as $property => $value) {
+
             if (!array_key_exists($property, $map)) {
                 continue;
             }
-            $setterMethod = 'set' . ucfirst($map[$property]);
+
             if ($value instanceof \SimpleXMLElement && $value->count() == 0) {
                 $value = (string)$value;
             }
-            if (method_exists($this, $setterMethod)) {
-                call_user_func([$this, $setterMethod], $value);
+
+            if (is_array($value) && $this instanceof \ArrayAccess) {
+                foreach ($value as $singleElement) {
+                    $this[] = $singleElement;
+                }
             } else {
-                $this->{"_$property"} = $value;
+                $setterMethod = 'set' . ucfirst($map[$property]);
+
+                if (method_exists($this, $setterMethod)) {
+                    call_user_func([$this, $setterMethod], $value);
+                } else {
+                    $this->{"_$property"} = $value;
+                }
             }
         }
         return $this;

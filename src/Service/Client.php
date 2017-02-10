@@ -3,6 +3,7 @@ namespace DigitalVirgo\MTSP\Service;
 
 use DigitalVirgo\MTSP\Model\Service;
 use DigitalVirgo\MTSP\Model\Services;
+use DigitalVirgo\MTSP\Model\Subscriptions;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Stream\Stream;
 
@@ -178,7 +179,7 @@ class Client extends GuzzleClient {
      * @param string $serviceName Service name
      * @param null|string|\DateTime $from Optional date from filter
      * @param null|string|\DateTime $to Optional date to filter
-     * @return string
+     * @return Subscriptions
      */
     public function getSubscriptions($serviceName, $from = null, $to = null) {
 
@@ -204,7 +205,10 @@ class Client extends GuzzleClient {
             $payload['toDate'] = $to->format('c');
         }
 
-        return $this->_request("services/{$serviceName}/subscriptions", "GET", $payload);
+        return (new Subscriptions())
+            ->fromXml(
+                $this->_request("services/{$serviceName}/subscriptions", "GET", $payload)
+            );
     }
 
     public function getSubscription($serviceName, $subscriptionId) {
