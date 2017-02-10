@@ -4,6 +4,7 @@ namespace DigitalVirgo\MTSP\Service;
 use DigitalVirgo\MTSP\Model\Service;
 use DigitalVirgo\MTSP\Model\Services;
 use DigitalVirgo\MTSP\Model\Subscriptions;
+use DigitalVirgo\MTSP\Model\Subscription;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Stream\Stream;
 
@@ -154,34 +155,44 @@ class Client extends GuzzleClient {
 
     /**
      * Get Services in xml format
-     * @return Services
+     * @param bool $raw return raw xml output
+     * @return Services|string
      */
-    public function getServices() {
-        return (new Services())
-            ->fromXml(
-                $this->_request("services")
-            );
+    public function getServices($raw = false) {
+
+        $response = $this->_request("services");
+
+        if ($raw) {
+            return $response;
+        }
+
+        return (new Services())->fromXml($response);
     }
 
     /**
      * @param $serviceName Service name
+     * @param bool $raw return raw xml output
      * @return Service
      */
-    public function getService($serviceName) {
+    public function getService($serviceName, $raw = false) {
 
-        return (new Service())
-            ->fromXml(
-                $this->_request("services/{$serviceName}")
-            );
+        $response = $this->_request("services/{$serviceName}");
+
+        if ($raw) {
+            return $response;
+        }
+
+        return (new Service())->fromXml($response);
     }
 
     /**
      * @param string $serviceName Service name
      * @param null|string|\DateTime $from Optional date from filter
      * @param null|string|\DateTime $to Optional date to filter
+     * @param bool $raw return raw xml output
      * @return Subscriptions
      */
-    public function getSubscriptions($serviceName, $from = null, $to = null) {
+    public function getSubscriptions($serviceName, $from = null, $to = null, $raw = false) {
 
         if ($from xor $to) {
             throw new \Exception('Both dates are required');
@@ -205,17 +216,32 @@ class Client extends GuzzleClient {
             $payload['toDate'] = $to->format('c');
         }
 
-        return (new Subscriptions())
-            ->fromXml(
-                $this->_request("services/{$serviceName}/subscriptions", "GET", $payload)
-            );
+        $response = $this->_request("services/{$serviceName}/subscriptions", "GET", $payload);
+
+        if ($raw) {
+            return $response;
+        }
+
+        return (new Subscriptions())->fromXml($response);
     }
 
-    public function getSubscription($serviceName, $subscriptionId) {
-        return $this->_request("services/{$serviceName}/subscriptions/{$subscriptionId}");
+    /**
+     * @param $serviceName
+     * @param $subscriptionId
+     * @param bool $raw return raw xml output
+     * @return Subscription
+     */
+    public function getSubscription($serviceName, $subscriptionId, $raw = false) {
+        $response = $this->_request("services/{$serviceName}/subscriptions/{$subscriptionId}");
+
+        if ($raw) {
+            return $response;
+        }
+
+        return (new Subscription())->fromXml($response);
     }
 
-    public function getBilledNumbers($serviceName, $subscriptionId, $id = null) {
+    public function getBilledNumbers($serviceName, $subscriptionId, $id = null, $raw = false) {
         $payload = [];
 
         if ($id) {
@@ -225,12 +251,12 @@ class Client extends GuzzleClient {
         return $this->_request("services/{$serviceName}/subscriptions/{$subscriptionId}/billing", "GET", $payload);
     }
 
-    public function getSubscribers($serviceName, $operator = null) {
+    public function getSubscribers($serviceName, $operator = null, $raw = false) {
 
         return $this->_request("services/{$serviceName}/subscribers/{$operator}");
     }
 
-    public function addSubscription($serviceName, $scheduledTo, $message) {
+    public function addSubscription($serviceName, $scheduledTo, $message, $raw = false) {
 //        POST /services/{service_name}/subscriptions/.
 
 //        ALLOWED ASCII CHARACTERS IN TEXT CONTENTS
@@ -245,7 +271,7 @@ class Client extends GuzzleClient {
 
     }
 
-    public function updateSubscription($serviceName, $subscriptionId, $scheduledTo, $message) {
+    public function updateSubscription($serviceName, $subscriptionId, $scheduledTo, $message, $raw = false) {
 //        PUT /services/{service name}/subscriptions/.
     }
 

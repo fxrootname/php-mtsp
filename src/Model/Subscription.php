@@ -3,9 +3,14 @@
 namespace DigitalVirgo\MTSP\Model;
 
 use DigitalVirgo\MTSP\Model\Enum\ServiceType;
+use DigitalVirgo\MTSP\Service\Client;
 
 class Subscription extends ModelAbstract
 {
+    use ContentsTrait {
+        ContentsTrait::_getDomMap as _contentsTraitGetDomMap;
+    }
+
     /**
      * @var int
      */
@@ -234,10 +239,47 @@ class Subscription extends ModelAbstract
         return $this;
     }
 
+    public function loadMore()
+    {
+        if (
+            (!$this->getId() || !$this->getServiceName())
+            && !$this->getLink()
+        ) {
+            throw new \Exception('Id or ServiceName is required');
+        }
+
+        if (!$this->getServiceName()) {
+            $this->setServiceName($this->_fetchServiceNameFromLink());
+        }
+
+        $client = Client::getInstance();
+
+        $this->fromXml(
+            $client->getSubscription($this->getServiceName(), $this->getId(), true)
+        );
+
+        return $this;
+    }
+
+    protected function _fetchServiceNameFromLink()
+    {
+        if (!$this->getLink()) {
+            throw new \Exception('Link is required');
+        }
+
+        $parts = explode('/', $this->getLink());
+
+        if (count($parts) < 3) {
+            throw new \Exception('Invalid link value');
+        }
+
+        return $parts[2];
+    }
+
     protected function _getDomMap()
     {
         return [
-            'subscription' => [
+            'subscription' => array_merge([
                 'id'          => 'id',
                 'active'      => 'active',
                 'scheduledTo' => 'scheduledTo',
@@ -247,7 +289,7 @@ class Subscription extends ModelAbstract
                 'updateDate'  => 'updateDate',
                 'alertDate'   => 'alertDate',
                 'link'        => 'link'
-            ]
+            ], reset($this->_contentsTraitGetDomMap()))
         ];
 
     }
