@@ -2,6 +2,7 @@
 
 namespace DigitalVirgo\MTSP\Model;
 
+use DigitalVirgo\MTSP\Model\Enum\OperatorCode;
 use DigitalVirgo\MTSP\Model\Enum\SubscriptionStatus;
 
 /**
@@ -38,6 +39,10 @@ class Status extends ModelAbstract
      */
     public function setOperatorCode($operatorCode)
     {
+        if ($operatorCode && !in_array((int)$operatorCode, OperatorCode::getConstants())) {
+            throw new \Exception('Invalid operatorCode value. Accepted: ' . implode(', ', OperatorCode::getConstants()));
+        }
+
         $this->_operatorCode = (int)$operatorCode;
         return $this;
     }
@@ -57,7 +62,7 @@ class Status extends ModelAbstract
     public function setStatusCode($statusCode)
     {
         if ($statusCode && !in_array($statusCode, SubscriptionStatus::getConstants())) {
-            throw new \Exception('Invalid serviceStatus value. Accepted: ' . implode(', ', SubscriptionStatus::getConstants()));
+            throw new \Exception('Invalid statusCode value. Accepted: ' . implode(', ', SubscriptionStatus::getConstants()));
         }
 
         $this->_statusCode = $statusCode;
