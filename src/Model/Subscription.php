@@ -5,7 +5,14 @@ namespace DigitalVirgo\MTSP\Model;
 use DigitalVirgo\MTSP\Model\Enum\ServiceType;
 use DigitalVirgo\MTSP\Service\Client;
 
-class Subscription extends ModelAbstract
+/**
+ * Class Subscription
+ * @package DigitalVirgo\MTSP\Model
+ *
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ *
+ */
+class Subscription extends ModelAbstract implements ContentsTrait
 {
     use ContentsTrait {
         ContentsTrait::_getDomMap as _contentsTraitGetDomMap;
@@ -55,6 +62,11 @@ class Subscription extends ModelAbstract
      * @var string
      */
     protected $_link;
+
+    /**
+     * @var Status
+     */
+    protected $_status;
 
     /**
      * @return int
@@ -239,6 +251,34 @@ class Subscription extends ModelAbstract
         return $this;
     }
 
+    /**
+     * @return Status
+     */
+    public function getStatus()
+    {
+        return $this->_status;
+    }
+
+    /**
+     * @param Status|array $status
+     * @return Subscription
+     */
+    public function setStatus($status)
+    {
+        if (is_array($status)) {
+            $status = new Status($status);
+        }
+
+        $this->_status = $status;
+        return $this;
+    }
+
+    /**
+     * Loads additional content using Client API
+     *
+     * @return $this
+     * @throws \Exception
+     */
     public function loadMore()
     {
         if (
@@ -261,6 +301,11 @@ class Subscription extends ModelAbstract
         return $this;
     }
 
+    /**
+     * Returns serviceName from link property
+     * @return string
+     * @throws \Exception
+     */
     protected function _fetchServiceNameFromLink()
     {
         if (!$this->getLink()) {
@@ -276,6 +321,9 @@ class Subscription extends ModelAbstract
         return $parts[2];
     }
 
+    /**
+     * @return array
+     */
     protected function _getDomMap()
     {
         return [
@@ -288,7 +336,8 @@ class Subscription extends ModelAbstract
                 'createDate'  => 'createDate',
                 'updateDate'  => 'updateDate',
                 'alertDate'   => 'alertDate',
-                'link'        => 'link'
+                'link'        => 'link',
+                'status'      => 'status'
             ], reset($this->_contentsTraitGetDomMap()))
         ];
 

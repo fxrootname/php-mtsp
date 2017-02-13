@@ -1,6 +1,9 @@
 <?php
 
 namespace DigitalVirgo\MTSP\Model;
+use DigitalVirgo\MTSP\Model\Message\Mms;
+use DigitalVirgo\MTSP\Model\Message\Sms;
+use DigitalVirgo\MTSP\Model\Message\WapPush;
 
 /**
  * Class ContentsTrait
@@ -33,6 +36,10 @@ trait ContentsTrait {
      */
     public function setSms($sms)
     {
+        if (is_array($sms)) {
+            $sms = new Sms($sms);
+        }
+
         $this->_sms = $sms;
         return $this;
     }
@@ -51,6 +58,10 @@ trait ContentsTrait {
      */
     public function setMms($mms)
     {
+        if (is_array($mms)) {
+            $mms = new Mms($mms);
+        }
+
         $this->_mms = $mms;
         return $this;
     }
@@ -69,6 +80,10 @@ trait ContentsTrait {
      */
     public function setWapPush($wapPush)
     {
+        if (is_array($wapPush)) {
+            $wapPush = new WapPush($wapPush);
+        }
+
         $this->_wapPush = $wapPush;
         return $this;
     }
@@ -127,8 +142,9 @@ trait ContentsTrait {
         return $this;
     }
 
-
-
+    /**
+     * @return array
+     */
     protected function _getDomMap()
     {
         return [

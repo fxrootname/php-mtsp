@@ -2,7 +2,13 @@
 
 namespace DigitalVirgo\MTSP\Model;
 
-
+/**
+ * Class Subscriptions
+ * @package DigitalVirgo\MTSP\Model
+ *
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ *
+ */
 class Subscriptions extends ModelAbstract implements \ArrayAccess
 {
 

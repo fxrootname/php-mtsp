@@ -15,7 +15,7 @@ trait ModelAbstractTrait {
      * Set class data using setters methods
      * @param array $params
      */
-    public function setData(array $params)
+    public function setParamsData(array $params)
     {
         foreach ($params as $name => $value) {
             $method = 'set' . ucfirst($name);
@@ -81,7 +81,7 @@ trait ModelAbstractTrait {
     {
 
         //should be DomElement
-        if ($element instanceof ModelAbstractTrait) {
+        if ($element instanceof ModelAbstractTraitInterface) {
             $root->appendChild($dom->importNode($element->toDomElement(), true));
 
             //should be simple element

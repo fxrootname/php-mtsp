@@ -4,6 +4,13 @@ namespace DigitalVirgo\MTSP\Model;
 
 use DigitalVirgo\MTSP\Model\Enum\ServiceType;
 
+/**
+ * Class Service
+ * @package DigitalVirgo\MTSP\Model
+ *
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ *
+ */
 class Service extends ModelAbstract
 {
 
@@ -51,6 +58,12 @@ class Service extends ModelAbstract
      * @var string
      */
     protected $_serviceType;
+
+    /**
+     * @var string
+     * @todo validate with enum
+     */
+    protected $_serviceStatus;
 
     /**
      * @return boolean
@@ -227,6 +240,24 @@ class Service extends ModelAbstract
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getServiceStatus()
+    {
+        return $this->_serviceStatus;
+    }
+
+    /**
+     * @param string $serviceStatus
+     * @return Service
+     */
+    public function setServiceStatus($serviceStatus)
+    {
+        $this->_serviceStatus = $serviceStatus;
+        return $this;
+    }
+
     protected function _getDomMap()
     {
         return [
@@ -239,7 +270,8 @@ class Service extends ModelAbstract
                 'id'            => 'id',
                 'sendLa'        => 'sendLa',
                 'serviceName'   => 'serviceName',
-                'serviceType'   => 'serviceType'
+                'serviceType'   > 'serviceType',
+                'serviceStatus' => 'serviceStatus'
             ]
         ];
 

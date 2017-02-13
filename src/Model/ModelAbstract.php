@@ -10,7 +10,7 @@ namespace DigitalVirgo\MTSP\Model;
  *
  * Abstract class for model providing xml serialization/deserialization
  */
-abstract class ModelAbstract
+abstract class ModelAbstract implements ModelAbstractTraitInterface
 {
     use ModelAbstractTrait;
 
@@ -21,7 +21,7 @@ abstract class ModelAbstract
     public function __construct($params = array())
     {
         if (!empty($params)) {
-            $this->setData($params);
+            $this->setParamsData($params);
         }
     }
 
