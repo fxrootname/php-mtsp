@@ -40,7 +40,7 @@ class Status extends ModelAbstract
     public function setOperatorCode($operatorCode)
     {
         if ($operatorCode && !in_array((int)$operatorCode, OperatorCode::getConstants())) {
-            throw new \Exception('Invalid operatorCode value. Accepted: ' . implode(', ', OperatorCode::getConstants()));
+            throw new \Exception("Invalid operatorCode value: {$operatorCode} Accepted: " . implode(', ', OperatorCode::getConstants()));
         }
 
         $this->_operatorCode = (int)$operatorCode;
