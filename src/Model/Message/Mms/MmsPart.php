@@ -107,6 +107,46 @@ class MmsPart extends ModelAbstract
         return $mmsPart;
     }
 
+
+    /**
+     * Save MmsPart to file
+     * @param string $fileLocation File destination
+     * @return $this
+     * @throws \Exception
+     */
+    public function saveToFile($fileLocation)
+    {
+        if (!$this->getData()) {
+            throw new \Exception("Empty data!");
+        }
+
+        $dirName  = $fileLocation;
+        $baseName = $this->getName();
+
+        if (!is_dir($fileLocation)) {
+            $baseName = pathinfo($fileLocation, PATHINFO_BASENAME);
+            $dirName  = pathinfo($fileLocation, PATHINFO_DIRNAME);
+        }
+
+        if (!is_writable($dirName)) {
+            throw new \Exception("Unable to save file.");
+        }
+
+        if ((substr($dirName, strlen($dirName) - 1)) !== '/') {
+            $filePath = $dirName . '/' . $baseName;
+        } else {
+            $filePath = $dirName . $baseName;
+        }
+
+        if (file_exists($filePath) && !is_writable($filePath)) {
+            throw new \Exception("Unable to overwrite file.");
+        }
+
+        file_put_contents($filePath, base64_decode($this->getData()));
+
+        return $this;
+    }
+
     /**
      * @return array
      */
