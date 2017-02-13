@@ -1,9 +1,8 @@
 <?php
 
 namespace DigitalVirgo\MTSP\Model;
-use DigitalVirgo\MTSP\Model\Message\Mms;
-use DigitalVirgo\MTSP\Model\Message\Sms;
-use DigitalVirgo\MTSP\Model\Message\WapPush;
+
+use DigitalVirgo\MTSP\Model\Message;
 
 /**
  * Class ContentsTrait
@@ -15,15 +14,38 @@ use DigitalVirgo\MTSP\Model\Message\WapPush;
 trait ContentsTrait {
     use ModelAbstractTrait;
 
+    /**
+     * @var Message\Sms
+     */
     protected $_sms;
+
+    /**
+     * @var Message\Mms
+     */
     protected $_mms;
+
+    /**
+     * @var Message\WapPush
+     */
     protected $_wapPush;
+
+    /**
+     * @var Message\PersonalizedSms
+     */
     protected $_personalizedSms;
+
+    /**
+     * @var Message\PersonalizedMms
+     */
     protected $_personalizedMms;
+
+    /**
+     * @var Message\PersonalizedWapPush
+     */
     protected $_personalizedWapPush;
 
     /**
-     * @return mixed
+     * @return Message\Sms
      */
     public function getSms()
     {
@@ -31,13 +53,13 @@ trait ContentsTrait {
     }
 
     /**
-     * @param mixed $sms
-     * @return ContentsTrait
+     * @param Message\Sms|array $sms
+     * @return $this
      */
     public function setSms($sms)
     {
         if (is_array($sms)) {
-            $sms = new Sms($sms);
+            $sms = new Message\Sms($sms);
         }
 
         $this->_sms = $sms;
@@ -45,7 +67,7 @@ trait ContentsTrait {
     }
 
     /**
-     * @return mixed
+     * @return Message\Mms
      */
     public function getMms()
     {
@@ -53,13 +75,13 @@ trait ContentsTrait {
     }
 
     /**
-     * @param mixed $mms
-     * @return ContentsTrait
+     * @param Message\Mms|array $mms
+     * @return $this
      */
     public function setMms($mms)
     {
         if (is_array($mms)) {
-            $mms = new Mms($mms);
+            $mms = new Message\Mms($mms);
         }
 
         $this->_mms = $mms;
@@ -67,7 +89,7 @@ trait ContentsTrait {
     }
 
     /**
-     * @return mixed
+     * @return Message\WapPush
      */
     public function getWapPush()
     {
@@ -75,13 +97,13 @@ trait ContentsTrait {
     }
 
     /**
-     * @param mixed $wapPush
-     * @return ContentsTrait
+     * @param Message\WapPush|array $wapPush
+     * @return $this
      */
     public function setWapPush($wapPush)
     {
         if (is_array($wapPush)) {
-            $wapPush = new WapPush($wapPush);
+            $wapPush = new Message\WapPush($wapPush);
         }
 
         $this->_wapPush = $wapPush;
@@ -89,7 +111,7 @@ trait ContentsTrait {
     }
 
     /**
-     * @return mixed
+     * @return Message\PersonalizedSms
      */
     public function getPersonalizedSms()
     {
@@ -97,17 +119,21 @@ trait ContentsTrait {
     }
 
     /**
-     * @param mixed $personalizedSms
-     * @return ContentsTrait
+     * @param Message\PersonalizedSms|array $personalizedSms
+     * @return $this
      */
     public function setPersonalizedSms($personalizedSms)
     {
+        if (is_array($personalizedSms)) {
+            $personalizedSms = new Message\PersonalizedSms($personalizedSms);
+        }
+
         $this->_personalizedSms = $personalizedSms;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return Message\PersonalizedMms
      */
     public function getPersonalizedMms()
     {
@@ -115,17 +141,21 @@ trait ContentsTrait {
     }
 
     /**
-     * @param mixed $personalizedMms
-     * @return ContentsTrait
+     * @param Message\PersonalizedMms|array $personalizedMms
+     * @return $this
      */
     public function setPersonalizedMms($personalizedMms)
     {
+        if (is_array($personalizedMms)) {
+            $personalizedMms = new Message\PersonalizedMms($personalizedMms);
+        }
+
         $this->_personalizedMms = $personalizedMms;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return Message\PersonalizedWapPush
      */
     public function getPersonalizedWapPush()
     {
@@ -133,11 +163,15 @@ trait ContentsTrait {
     }
 
     /**
-     * @param mixed $personalizedWapPush
-     * @return ContentsTrait
+     * @param Message\PersonalizedWapPush|array $personalizedWapPush
+     * @return $this
      */
     public function setPersonalizedWapPush($personalizedWapPush)
     {
+        if (is_array($personalizedWapPush)) {
+            $personalizedWapPush = new Message\PersonalizedWapPush($personalizedWapPush);
+        }
+
         $this->_personalizedWapPush = $personalizedWapPush;
         return $this;
     }

@@ -6,7 +6,7 @@ namespace DigitalVirgo\MTSP\Model;
  * Interface ContentsTrait
  * @package DigitalVirgo\MTSP\Model
  */
-interface ContentsTrait {
+interface ContentsTraitInterface {
 
     /**
      * @return mixed

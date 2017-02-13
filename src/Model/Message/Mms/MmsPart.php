@@ -85,6 +85,31 @@ class MmsPart extends ModelAbstract
         return $this;
     }
 
+    /**
+     * Converts file Into MmsPart object
+     *
+     * @param $filePath
+     * @return MmsPart
+     * @throws \Exception
+     */
+    public static function fromFile($filePath)
+    {
+        if (!file_exists($filePath)) {
+            throw new \Exception('File does not exists.');
+        }
+
+        $mmsPart = (new self())
+            ->setName(pathinfo($filePath, PATHINFO_BASENAME))
+            ->setMimeType(mime_content_type($filePath))
+            ->setData(base64_encode(file_get_contents($filePath)))
+        ;
+
+        return $mmsPart;
+    }
+
+    /**
+     * @return array
+     */
     protected function _getDomMap()
     {
         return [

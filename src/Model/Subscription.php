@@ -12,7 +12,7 @@ use DigitalVirgo\MTSP\Service\Client;
  * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
  *
  */
-class Subscription extends ModelAbstract implements ContentsTrait
+class Subscription extends ModelAbstract implements ContentsTraitInterface
 {
     use ContentsTrait {
         ContentsTrait::_getDomMap as _contentsTraitGetDomMap;

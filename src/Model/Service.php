@@ -2,6 +2,7 @@
 
 namespace DigitalVirgo\MTSP\Model;
 
+use DigitalVirgo\MTSP\Model\Enum\ServiceStatus;
 use DigitalVirgo\MTSP\Model\Enum\ServiceType;
 
 /**
@@ -61,7 +62,6 @@ class Service extends ModelAbstract
 
     /**
      * @var string
-     * @todo validate with enum
      */
     protected $_serviceStatus;
 
@@ -254,6 +254,10 @@ class Service extends ModelAbstract
      */
     public function setServiceStatus($serviceStatus)
     {
+        if ($serviceStatus && !in_array($serviceStatus, ServiceStatus::getConstants())) {
+            throw new \Exception('Invalid serviceStatus value. Accepted: ' . implode(', ', ServiceStatus::getConstants()));
+        }
+
         $this->_serviceStatus = $serviceStatus;
         return $this;
     }

@@ -2,6 +2,8 @@
 
 namespace DigitalVirgo\MTSP\Model;
 
+use DigitalVirgo\MTSP\Model\Enum\SubscriptionStatus;
+
 /**
  * Class Status
  * @package DigitalVirgo\MTSP\Model
@@ -14,13 +16,11 @@ class Status extends ModelAbstract
 
     /**
      * @var int
-     * @todo validate by enum
      */
     protected $_operatorCode;
 
     /**
      * @var string
-     * @todo validate by enum
      */
     protected $_statusCode;
 
@@ -56,6 +56,10 @@ class Status extends ModelAbstract
      */
     public function setStatusCode($statusCode)
     {
+        if ($statusCode && !in_array($statusCode, SubscriptionStatus::getConstants())) {
+            throw new \Exception('Invalid serviceStatus value. Accepted: ' . implode(', ', SubscriptionStatus::getConstants()));
+        }
+
         $this->_statusCode = $statusCode;
         return $this;
     }
