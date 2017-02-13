@@ -9,7 +9,7 @@ namespace DigitalVirgo\MTSP\Model;
  * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
  *
  */
-class Services extends ModelAbstract implements \ArrayAccess
+class Services extends ModelAbstract implements \ArrayAccess, \Iterator
 {
 
     /**
@@ -68,6 +68,47 @@ class Services extends ModelAbstract implements \ArrayAccess
      */
     public function offsetGet($offset) {
         return isset($this->_name[$offset]) ? $this->_name[$offset] : null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function current()
+    {
+        return current($this->_name);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function next()
+    {
+        return next($this->_name);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function key()
+    {
+        return key($this->_name);
+    }
+
+    /**
+     * @return bool
+     */
+    public function valid()
+    {
+        $key = $this->key();
+        return $key !== null && $key !== false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function rewind()
+    {
+        return reset($this->_name);
     }
 
     /**

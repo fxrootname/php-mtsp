@@ -274,6 +274,22 @@ class Subscription extends ModelAbstract implements ContentsTraitInterface
     }
 
     /**
+     * Cleans field that not allowed for update
+     * @return $this
+     */
+    public function cleanBeforeSave()
+    {
+        $this
+            ->setAlertDate(null)
+            ->setCreateDate(null)
+            ->setLink(null)
+            ->setStatus(null)
+            ->setUpdateDate(null);
+
+        return $this;
+    }
+
+    /**
      * Loads additional content using Client API
      *
      * @return $this

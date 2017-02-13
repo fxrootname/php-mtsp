@@ -4,6 +4,7 @@ namespace DigitalVirgo\MTSP\Model;
 
 use DigitalVirgo\MTSP\Model\Enum\ServiceStatus;
 use DigitalVirgo\MTSP\Model\Enum\ServiceType;
+use DigitalVirgo\MTSP\Service\Client;
 
 /**
  * Class Service
@@ -260,6 +261,19 @@ class Service extends ModelAbstract
 
         $this->_serviceStatus = $serviceStatus;
         return $this;
+    }
+
+    /**
+     * @param null|string|\DateTime $from Optional date from filter
+     * @param null|string|\DateTime $to Optional date to filter
+     * @param bool $raw return raw xml output
+     * @return Subscriptions
+     */
+    public function getSubscriptions($from = null, $to = null, $raw = false)
+    {
+        $client = Client::getInstance();
+
+        return $client->getSubscriptions($this->getServiceName(), $from, $to, $raw);
     }
 
     protected function _getDomMap()

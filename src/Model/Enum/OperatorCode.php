@@ -2,7 +2,13 @@
 
 namespace DigitalVirgo\MTSP\Model\Enum;
 
-
+/**
+ * Class OperatorCode
+ * @package DigitalVirgo\MTSP\Model\Enum
+ *
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ *
+ */
 class OperatorCode extends EnumAbstract
 {
     const AFGHANISTAN_AWCC = 41201;

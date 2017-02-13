@@ -1,11 +1,13 @@
 <?php
 namespace DigitalVirgo\MTSP\Service;
 
+use DigitalVirgo\MTSP\Model\ModelAbstractTraitInterface;
 use DigitalVirgo\MTSP\Model\Service;
 use DigitalVirgo\MTSP\Model\Services;
 use DigitalVirgo\MTSP\Model\Subscriptions;
 use DigitalVirgo\MTSP\Model\Subscription;
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Stream\Stream;
 
 /**
@@ -108,13 +110,15 @@ class Client extends GuzzleClient {
     /**
      * Setup basic auth
      *
-     * @return null
+     * @return $this
      */
     protected function _configureAuth()
     {
         if ($this->_username && $this->_password) {
             $this->setDefaultOption('auth', [$this->_username, $this->_password]);
         }
+
+        return $this;
     }
 
     /**
@@ -139,13 +143,23 @@ class Client extends GuzzleClient {
 
                 break;
             case 'POST':
-                $options['body'] = $payload;
+            case 'PUT':
+                if ($payload instanceof ModelAbstractTraitInterface) {
+                    $options['body'] = Stream::factory($payload->toXml());
+                    $options['headers']['Content-type'] = 'application/xml';
+                } else {
+                    $options['body'] = Stream::factory($payload);
+                }
                 break;
         }
 
-        $response = $this->send(
-            $this->createRequest($method, $url, $options)
-        );
+        try {
+            $response = $this->send(
+                $this->createRequest($method, $url, $options)
+            );
+        } catch (ClientException $e) {
+            throw new \Exception((string)$e->getResponse()->getBody());
+        }
 
         /** @var \GuzzleHttp\Stream\Stream $body */
         $body = $response->getBody();
@@ -158,7 +172,7 @@ class Client extends GuzzleClient {
      * @param bool $raw return raw xml output
      * @return Services|string
      */
-    public function getServices($raw = false) {
+    public function getServicesNames($raw = false) {
 
         $response = $this->_request("services");
 
@@ -271,8 +285,40 @@ class Client extends GuzzleClient {
 
     }
 
-    public function updateSubscription($serviceName, $subscriptionId, $scheduledTo, $message, $raw = false) {
-//        PUT /services/{service name}/subscriptions/.
+    /**
+     * Update Subscription
+     * @param Subscription|array $subscription
+     * @param bool $raw
+     * @return Subscription|string
+     * @throws \Exception
+     */
+    public function updateSubscription($subscription, $raw = false) {
+        if (is_array($subscription)) {
+            $subscription = new Subscription($subscription);
+        }
+
+        $serviceName = $subscription->getServiceName();
+
+        if (!$subscription->getServiceName()) {
+            throw new \Exception('Missing serviceName in subscription');
+        }
+
+        $clonedSubscription = clone $subscription;
+
+        // clean no updateable data
+        $clonedSubscription->cleanBeforeSave();
+
+        $response = $this->_request("services/{$serviceName}/subscriptions", "PUT", $clonedSubscription);
+
+        //update existing subscription
+        $subscription->fromXml($response);
+
+        if ($raw) {
+            return $response;
+        }
+
+        return $subscription;
+
     }
 
 
