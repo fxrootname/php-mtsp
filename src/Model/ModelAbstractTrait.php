@@ -158,6 +158,11 @@ trait ModelAbstractTrait {
     public function fromXml($xml)
     {
         if (is_string($xml)) {
+
+            if (empty($xml)) {
+                return null;
+            }
+
             $xml = new \SimpleXMLElement($xml);
         }
 

@@ -3,6 +3,7 @@
 namespace DigitalVirgo\MTSP\Model\Message;
 
 use DigitalVirgo\MTSP\Model\ModelAbstract;
+use DigitalVirgo\MTSP\Util\Helper;
 
 /**
  * Class Sms
@@ -33,6 +34,10 @@ class Sms extends ModelAbstract
      */
     public function setText($text)
     {
+        if (!Helper::isMessageTextValid($text)) {
+            throw new \Exception('Text have invalid characters');
+        }
+
         $this->_text = $text;
         return $this;
     }

@@ -64,9 +64,9 @@ class Subscription extends ModelAbstract implements ContentsTraitInterface
     protected $_link;
 
     /**
-     * @var Status
+     * @var Status[]
      */
-    protected $_status;
+    protected $_status = [];
 
     /**
      * @return int
@@ -252,7 +252,7 @@ class Subscription extends ModelAbstract implements ContentsTraitInterface
     }
 
     /**
-     * @return Status
+     * @return Status[]
      */
     public function getStatus()
     {
@@ -260,17 +260,36 @@ class Subscription extends ModelAbstract implements ContentsTraitInterface
     }
 
     /**
-     * @param Status|array $status
+     * @param Status[]|array $status
      * @return Subscription
      */
-    public function setStatus($status)
+    public function setStatus(array $statuses)
+    {
+
+        $this->_status = [];
+
+        foreach ($statuses as $status) {
+            if (is_array($status)) {
+                $status = new Status($status);
+            }
+
+            $this->_status[] = $status;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Status|array $status
+     *
+     */
+    public function addStatus($status)
     {
         if (is_array($status)) {
             $status = new Status($status);
         }
 
-        $this->_status = $status;
-        return $this;
+        $this->_status[] = $status;
     }
 
     /**

@@ -6,6 +6,10 @@ use DigitalVirgo\MTSP\Model\Service;
 use DigitalVirgo\MTSP\Model\Services;
 use DigitalVirgo\MTSP\Model\Subscriptions;
 use DigitalVirgo\MTSP\Model\Subscription;
+use DigitalVirgo\MTSP\Service\Client\Exception\BadRequestException;
+use DigitalVirgo\MTSP\Service\Client\Exception\MethodNotAllowedException;
+use DigitalVirgo\MTSP\Service\Client\Exception\NotFoundException;
+use DigitalVirgo\MTSP\Service\Client\Exception\UnauthorizedException;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Stream\Stream;
@@ -19,8 +23,8 @@ use GuzzleHttp\Stream\Stream;
  */
 class Client extends GuzzleClient {
 
-//    const API_URL = 'http://mtserviceproxy.services.avantis.pl/';
-    const API_URL = 'http://beta2:9080/mtsp/';
+    const API_URL = 'http://mtserviceproxy.services.avantis.pl/';
+//    const API_URL = 'http://beta2:9080/mtsp/';
 
     /**
      * @var Client
@@ -158,7 +162,24 @@ class Client extends GuzzleClient {
                 $this->createRequest($method, $url, $options)
             );
         } catch (ClientException $e) {
-            throw new \Exception((string)$e->getResponse()->getBody());
+
+            switch ($e->getResponse()->getStatusCode()) {
+                case 400:
+                    throw new BadRequestException((string)$e->getResponse()->getBody());
+                    break;
+                case 401:
+                    throw new UnauthorizedException();
+                    break;
+                case 404:
+                    throw new NotFoundException();
+                    break;
+                case 405:
+                    throw new MethodNotAllowedException();
+                    break;
+                default:
+                    throw new \Exception((string)$e->getResponse()->getBody());
+                    break;
+            }
         }
 
         /** @var \GuzzleHttp\Stream\Stream $body */

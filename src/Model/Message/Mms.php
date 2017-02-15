@@ -4,6 +4,8 @@ namespace DigitalVirgo\MTSP\Model\Message;
 
 use DigitalVirgo\MTSP\Model\ModelAbstract;
 use DigitalVirgo\MTSP\Model\Message\Mms\MmsPart;
+use DigitalVirgo\MTSP\Util\Helper;
+
 
 /**
  * Class Mms
@@ -73,6 +75,10 @@ class Mms extends ModelAbstract
      */
     public function setTitle($title)
     {
+        if (!Helper::isMessageTextValid($title)) {
+            throw new \Exception('Title have invalid characters');
+        }
+
         $this->_title = $title;
         return $this;
     }
