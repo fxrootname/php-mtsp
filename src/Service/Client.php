@@ -270,24 +270,43 @@ class Client extends GuzzleClient {
         return $this->_request("services/{$serviceName}/subscribers/{$operator}");
     }
 
-    public function addSubscription($serviceName, $scheduledTo, $message, $raw = false) {
-//        POST /services/{service_name}/subscriptions/.
+    /**
+     * Creating new subscription
+     * @param Subscription|array $subscription Subscription data
+     * @param bool $raw return raw xml response
+     * @return Subscription|string
+     * @throws \Exception
+     */
+    public function addSubscription($subscription, $raw = false) {
+        if (is_array($subscription)) {
+            $subscription = new Subscription($subscription);
+        }
 
-//        ALLOWED ASCII CHARACTERS IN TEXT CONTENTS
-//0 1 2 3 4 5 6 7 8 9 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d
-//e f g h i j k l m n o p q r s t u v w x y z ą ć ę ł ń ó Ś ś ż ź Ą Ć Ę Ł Ń Ó Ś Ż
-//Ź ! @ # $ % & * ( ) - _ + = : ; ' " , . / \ < > ?     SP LF CR
-//
-//
-//        ADDITIONAL ALLOWED CHARACTERS IN TEXT CONTENTS FOR RUSSIAN OPERATORS
-//                                                           А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я а б в г д е ё ж з
-//и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я
+        $serviceName = $subscription->getServiceName();
+
+        if (!$subscription->getServiceName()) {
+            throw new \Exception('Missing serviceName in subscription');
+        }
+
+        // clean no updateable data
+        $subscription->cleanBeforeSave();
+
+        $response = $this->_request("services/{$serviceName}/subscriptions", "POST", $subscription);
+
+        //update existing subscription
+        $subscription->fromXml($response);
+
+        if ($raw) {
+            return $response;
+        }
+
+        return $subscription;
 
     }
 
     /**
      * Update Subscription
-     * @param Subscription|array $subscription
+     * @param Subscription|array $subscription Subscription data
      * @param bool $raw
      * @return Subscription|string
      * @throws \Exception
@@ -303,15 +322,15 @@ class Client extends GuzzleClient {
             throw new \Exception('Missing serviceName in subscription');
         }
 
-        $clonedSubscription = clone $subscription;
-
         // clean no updateable data
-        $clonedSubscription->cleanBeforeSave();
+        $subscription->cleanBeforeSave();
 
-        $response = $this->_request("services/{$serviceName}/subscriptions", "PUT", $clonedSubscription);
+        $response = $this->_request("services/{$serviceName}/subscriptions", "PUT", $subscription);
 
         //update existing subscription
         $subscription->fromXml($response);
+
+
 
         if ($raw) {
             return $response;

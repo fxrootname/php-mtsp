@@ -2,6 +2,7 @@
 
 namespace DigitalVirgo\MTSP\Model;
 
+use Cron\CronExpression;
 use DigitalVirgo\MTSP\Model\Enum\ServiceStatus;
 use DigitalVirgo\MTSP\Model\Enum\ServiceType;
 use DigitalVirgo\MTSP\Service\Client;
@@ -144,6 +145,84 @@ class Service extends ModelAbstract
     {
         $this->_cronSendDates = $cronSendDates;
         return $this;
+    }
+
+    public function getNextRunDate($currentTime = 'now', $nth = 0)
+    {
+        if (!$this->getCronSendDates()) {
+            throw new \Exception('Missing cronSendDates in Service');
+        }
+
+        list($cronString, $secconds) = $this->_quartzToCron($this->getCronSendDates());
+
+        $cronExpression = CronExpression::factory($cronString);
+
+        $nextExecution = $cronExpression->getNextRunDate($currentTime, $nth);
+
+        // set secconds
+        if (is_numeric($secconds)) {
+            $nextExecution->add(new \DateInterval("PT{$secconds}S"));
+        }
+
+        return $nextExecution;
+    }
+
+    protected function _quartzToCron($quartzString)
+    {
+        $quartzString = str_replace("?", "*", $quartzString);
+
+        $parts = explode(" ", $quartzString);
+
+        // add year if missing
+        if (count($parts) == 6) {
+            $parts[6] = "*";
+        }
+
+        //convert months: 4 index
+        $parts[4] = str_replace(
+            ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+            ['1',   '2',   '3',   '4',   '5',   '6',   '7',   '8',   '9',   '10',  '11',  '12'],
+            $parts[4]
+        );
+
+        //convert day of week: 5 index
+        if (is_numeric($parts[5])) { //check number format
+            $parts[5] = (int)$parts[5];
+            $parts[5]--;
+            if ($parts[5] == 0) {
+                $parts[5] = 7;
+            }
+        } else {
+            $parts[5] = str_replace(
+                ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
+                ['7',   '1',   '2',   '3',   '4',   '5',   '6'],
+                $parts[5]
+            );
+        }
+
+        //skip secconds
+        $secconds = $parts[0];
+        unset($parts[0]);
+
+        $cronExpression = implode(" ", $parts);
+
+        return [$cronExpression, $secconds];
+       /* return $quartzString;
+
+
+        return str_replace(
+            [
+                '?',
+
+                'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'
+            ],
+            [
+                '*',
+
+                '1',   '2',   '3',   '4',   '5',   '6',   '7',   '8',   '9',   '10',  '11',  '12',
+            ],
+            $quartzString
+        );  */
     }
 
     /**

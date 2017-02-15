@@ -10,7 +10,8 @@
     ],
     "require": {
         "php": ">=5.5",
-        "guzzlehttp/guzzle": "5.*"
+        "guzzlehttp/guzzle": "5.*",
+        "mtdowling/cron-expression": "^1.2"
     },
     "autoload": {
         "psr-4": {
