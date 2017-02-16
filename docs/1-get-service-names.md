@@ -15,7 +15,7 @@ Client::getInstance()->setAuth('YOUR_LOGIN', 'YOUR_PASSWORD');
 
 $client = Client::getInstance();
 
-/** @var $servicesNames \DigitalVirgo\MTSP\Model\Services 
+/** @var $servicesNames \DigitalVirgo\MTSP\Model\Services */
 $servicesNames = $client->getServicesNames();
 
 foreach ($servicesNames as $serviceName) {
