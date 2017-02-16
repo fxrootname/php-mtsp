@@ -30,14 +30,16 @@
                 \DigitalVirgo\MTSP\Model\Message\Mms\MmsPart::fromFile('/path/to/file.jpg'),
             ]
         ],
-        'scheduledTo' => $service->getNextRunDate() // generate next date for service
+        'scheduledTo' => \DigitalVirgo\MTSP\Util\Helper::getNextRunDate($service) // generate next date for service
     ]);
 
     /** @var $newSubscription \DigitalVirgo\MTSP\Model\Subscription */
     $newSubscription = new Subscription();
     $newSubscription->setActive(false);
     $newSubscription->setServiceName('SOME_SERVICE_2');
-    $newSubscription->setScheduledTo($service->getNextRunDate(null, 2)); // generate 2nd date from now for service
+    $newSubscription->setScheduledTo(
+        \DigitalVirgo\MTSP\Util\Helper::getNextRunDate($service, null, 2) // generate 2nd date from now for service
+    );
                        
     /** @var $subscription \DigitalVirgo\MTSP\Model\Subscription */
     $subscription = $client->addSubscription($newSubscription);
@@ -51,7 +53,7 @@
         'sms' => [
             'text' => 'Your sms text'
         ],
-        'scheduledTo' => $service->getNextRunDate('2020-01-01', 10) // generate 10th date after 2020-01-01 for service 
+        'scheduledTo' => \DigitalVirgo\MTSP\Util\Helper::getNextRunDate($service, '2020-01-01', 10) // generate 10th date after 2020-01-01 for service 
     ]);
 ```
 
