@@ -1,6 +1,7 @@
 <?php
 namespace DigitalVirgo\MTSP\Service;
 
+use DigitalVirgo\MTSP\Model\BilledData;
 use DigitalVirgo\MTSP\Model\ModelAbstractTraitInterface;
 use DigitalVirgo\MTSP\Model\Service;
 use DigitalVirgo\MTSP\Model\Services;
@@ -25,7 +26,6 @@ use GuzzleHttp\Stream\Stream;
 class Client extends GuzzleClient {
 
     const API_URL = 'http://mtserviceproxy.services.avantis.pl/';
-//    const API_URL = 'http://beta2:9080/mtsp/';
 
     /**
      * @var Client
@@ -44,7 +44,6 @@ class Client extends GuzzleClient {
 
     /**
      * Get new instance of client
-     *
      * @param string $baseUrl api base url
      * @return Client
      */
@@ -114,7 +113,6 @@ class Client extends GuzzleClient {
 
     /**
      * Setup basic auth
-     *
      * @return $this
      */
     protected function _configureAuth()
@@ -128,11 +126,15 @@ class Client extends GuzzleClient {
 
     /**
      * Send http request
-     *
      * @param string $url Request path
      * @param string $method Http method
      * @param mixed $payload Data to send with request
      * @return string Body string response
+     * @throws BadRequestException
+     * @throws MethodNotAllowedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
+     * @throws \Exception
      */
     protected function _request($url, $method = 'GET', $payload = null) {
 
@@ -206,6 +208,7 @@ class Client extends GuzzleClient {
     }
 
     /**
+     * Get service by name
      * @param $serviceName Service name
      * @param bool $raw return raw xml output
      * @return Service
@@ -222,6 +225,7 @@ class Client extends GuzzleClient {
     }
 
     /**
+     * Get subscriptions for service
      * @param string $serviceName Service name
      * @param null|string|\DateTime $from Optional date from filter
      * @param null|string|\DateTime $to Optional date to filter
@@ -262,6 +266,7 @@ class Client extends GuzzleClient {
     }
 
     /**
+     * Get single subscription
      * @param $serviceName
      * @param $subscriptionId
      * @param bool $raw return raw xml output
@@ -277,21 +282,30 @@ class Client extends GuzzleClient {
         return (new Subscription())->fromXml($response);
     }
 
-    public function getBilledNumbers($serviceName, $subscriptionId, $id = null, $raw = false) {
-        $payload = [];
+    /**
+     * Get billed numbers report for subscription
+     * @param string $serviceName Service Name
+     * @param int|string $subscriptionId Subscription id
+     * @param bool $raw
+     * @return BilledData|string
+     */
+    public function getBilledNumbers($serviceName, $subscriptionId, $raw = false) {
+        $response = $this->_request("services/{$serviceName}/subscriptions/{$subscriptionId}/billing", "GET");
 
-        if ($id) {
-            $payload['id'] = $id;
+
+        if ($raw) {
+            return $response;
         }
 
-        return $this->_request("services/{$serviceName}/subscriptions/{$subscriptionId}/billing", "GET", $payload);
+        return (new BilledData())->fromXml($response);
+
     }
 
     /**
      * Get subscribers for service
      * @param $serviceName
      * @param null $operator
-     * @param bool $raw
+     * @param bool $raw return raw xml output
      * @return SubscriberData|string
      */
     public function getSubscribers($serviceName, $operator = null, $raw = false) {
@@ -342,7 +356,7 @@ class Client extends GuzzleClient {
     /**
      * Update Subscription
      * @param Subscription|array $subscription Subscription data
-     * @param bool $raw
+     * @param bool $raw return raw xml output
      * @return Subscription|string
      * @throws \Exception
      */
@@ -372,6 +386,5 @@ class Client extends GuzzleClient {
         return $subscription;
 
     }
-
 
 }

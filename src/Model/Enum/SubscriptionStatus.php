@@ -29,4 +29,5 @@ class SubscriptionStatus extends EnumAbstract
     const SERVICE_INACTIVE                              = "-22";
     const BILLING_ERROR                                 = "-19";
     const UNDECLARED_ERROR                              = "-100";
+
 }

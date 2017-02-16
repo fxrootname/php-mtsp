@@ -10,6 +10,7 @@ use DigitalVirgo\MTSP\Model\ModelAbstractTrait;
  *
  * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
  *
+ *
  */
 trait PersonalizedTrait
 {
@@ -50,4 +51,5 @@ trait PersonalizedTrait
         ];
 
     }
+
 }

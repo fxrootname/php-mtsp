@@ -14,4 +14,5 @@ class ServiceStatus extends EnumAbstract
     const CONFIGURE  = "CONFIGURE";
     const TEST       = "TEST";
     const PRODUCTION = "PRODUCTION";
+
 }

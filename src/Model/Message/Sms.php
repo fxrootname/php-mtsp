@@ -14,7 +14,6 @@ use DigitalVirgo\MTSP\Util\Helper;
  */
 class Sms extends ModelAbstract
 {
-
     /**
      * @var string
      */
@@ -31,6 +30,7 @@ class Sms extends ModelAbstract
     /**
      * @param string $text
      * @return Sms
+     * @throws \Exception
      */
     public function setText($text)
     {

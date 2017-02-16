@@ -14,7 +14,6 @@ use DigitalVirgo\MTSP\Model\Enum\SubscriptionStatus;
  */
 class Status extends ModelAbstract
 {
-
     /**
      * @var int
      */

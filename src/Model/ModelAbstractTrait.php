@@ -9,8 +9,8 @@ namespace DigitalVirgo\MTSP\Model;
  * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
  *
  */
-trait ModelAbstractTrait {
-
+trait ModelAbstractTrait
+{
     /**
      * Set class data using setters methods
      * @param array $params
@@ -196,4 +196,5 @@ trait ModelAbstractTrait {
         }
         return $this;
     }
+
 }

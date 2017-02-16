@@ -8,7 +8,6 @@ namespace DigitalVirgo\MTSP\Model\Message;
  */
 interface PersonalizedTraitInterface
 {
-
     /**
      * @return string
      */

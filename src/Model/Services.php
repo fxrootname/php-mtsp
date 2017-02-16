@@ -11,7 +11,6 @@ namespace DigitalVirgo\MTSP\Model;
  */
 class Services extends ModelAbstract implements \ArrayAccess, \Iterator
 {
-
     /**
      * @var string[]
      */

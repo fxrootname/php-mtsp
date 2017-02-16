@@ -6,7 +6,6 @@ use DigitalVirgo\MTSP\Model\ModelAbstract;
 use DigitalVirgo\MTSP\Model\Message\Mms\MmsPart;
 use DigitalVirgo\MTSP\Util\Helper;
 
-
 /**
  * Class Mms
  * @package DigitalVirgo\MTSP\Model\Message
@@ -16,7 +15,6 @@ use DigitalVirgo\MTSP\Util\Helper;
  */
 class Mms extends ModelAbstract
 {
-
     /**
      * @var MmsPart[]
      */
@@ -83,6 +81,9 @@ class Mms extends ModelAbstract
         return $this;
     }
 
+    /**
+     * @return array
+     */
     protected function _getDomMap()
     {
         return [

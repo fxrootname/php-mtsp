@@ -14,7 +14,6 @@ use DigitalVirgo\MTSP\Util\Helper;
  */
 class WapPush extends ModelAbstract
 {
-
     /**
      * @var string
      */
@@ -36,6 +35,7 @@ class WapPush extends ModelAbstract
     /**
      * @param string $title
      * @return WapPush
+     * @throws \Exception
      */
     public function setTitle($title)
     {

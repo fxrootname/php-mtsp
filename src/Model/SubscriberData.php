@@ -11,7 +11,6 @@ namespace DigitalVirgo\MTSP\Model;
  */
 class SubscriberData extends ModelAbstract
 {
-
     /**
      * @var SubscribedMsisdnsPack[]
      */
@@ -49,6 +48,10 @@ class SubscriberData extends ModelAbstract
         return $this;
     }
 
+    /**
+     * @param $subscribedMsisdnsPack
+     * @return $this
+     */
     public function addSubscribedMsisdnsPack($subscribedMsisdnsPack)
     {
         if (is_array($subscribedMsisdnsPack)) {

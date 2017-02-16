@@ -16,7 +16,6 @@ use DigitalVirgo\MTSP\Util\Helper;
  */
 class Service extends ModelAbstract
 {
-
     /**
      * @var boolean
      */

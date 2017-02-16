@@ -11,7 +11,8 @@ use DigitalVirgo\MTSP\Model\Message;
  * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
  *
  */
-trait ContentsTrait {
+trait ContentsTrait
+{
     use ModelAbstractTrait;
 
     /**
@@ -193,4 +194,5 @@ trait ContentsTrait {
         ];
 
     }
+
 }

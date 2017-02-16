@@ -2,8 +2,8 @@
 
 namespace DigitalVirgo\MTSP\Model;
 
-interface ModelAbstractTraitInterface {
-
+interface ModelAbstractTraitInterface
+{
     /**
      * Set class data using setters methods
      * @param array $params
@@ -31,4 +31,5 @@ interface ModelAbstractTraitInterface {
      * @return $this
      */
     public function fromXml($xml);
+
 }

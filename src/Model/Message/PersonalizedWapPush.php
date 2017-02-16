@@ -12,4 +12,5 @@ namespace DigitalVirgo\MTSP\Model\Message;
 class PersonalizedWapPush extends WapPush implements PersonalizedTraitInterface
 {
     use PersonalizedTrait;
+
 }

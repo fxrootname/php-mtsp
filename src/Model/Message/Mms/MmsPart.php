@@ -13,7 +13,6 @@ use \DigitalVirgo\MTSP\Model\ModelAbstract;
  */
 class MmsPart extends ModelAbstract
 {
-
     /**
      * @var string mms data in base64
      * @todo validate is base64
@@ -160,4 +159,5 @@ class MmsPart extends ModelAbstract
             ]
         ];
     }
+
 }

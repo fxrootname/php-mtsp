@@ -1498,4 +1498,5 @@ class OperatorCode extends EnumAbstract
     const ZIMBABWE_ECONET = 64804;
     const ZIMBABWE_NET_ONE = 64801;
     const ZIMBABWE_TELECEL = 64803;
+
 }

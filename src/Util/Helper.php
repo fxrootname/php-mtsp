@@ -5,8 +5,8 @@ namespace DigitalVirgo\MTSP\Util;
 use DigitalVirgo\MTSP\Model\Service;
 use Cron\CronExpression;
 
-class Helper {
-
+class Helper
+{
     /**
      * Converts Quartz format to Cron format
      * @param $quartzString

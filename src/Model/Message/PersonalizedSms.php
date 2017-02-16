@@ -12,4 +12,5 @@ namespace DigitalVirgo\MTSP\Model\Message;
 class PersonalizedSms extends Sms implements PersonalizedTraitInterface
 {
     use PersonalizedTrait;
+
 }

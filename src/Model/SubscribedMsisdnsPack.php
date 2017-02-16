@@ -11,7 +11,6 @@ namespace DigitalVirgo\MTSP\Model;
  */
 class SubscribedMsisdnsPack extends ModelAbstract implements \ArrayAccess, \Iterator
 {
-
     /**
      * @var string
      */

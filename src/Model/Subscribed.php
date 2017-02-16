@@ -11,7 +11,6 @@ namespace DigitalVirgo\MTSP\Model;
  */
 class Subscribed extends ModelAbstract
 {
-
     /**
      * @var string
      */

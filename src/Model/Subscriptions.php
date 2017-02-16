@@ -11,7 +11,6 @@ namespace DigitalVirgo\MTSP\Model;
  */
 class Subscriptions extends ModelAbstract implements \ArrayAccess, \Iterator
 {
-
     /**
      * @var Subscription[]
      */
