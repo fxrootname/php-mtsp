@@ -13,4 +13,3 @@ Client::getInstance()->setAuth('YOUR_LOGIN', 'YOUR_PASSWORD');
 6. [Get subscribers](6-get-subscribers.md)
 7. [Add new subscription](7-add-subscription.md)
 8. [Update existing subscription](8-update-subscription.md)
-9. [Exceptions](9-exception.md)
