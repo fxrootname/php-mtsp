@@ -1,10 +1,14 @@
 <?php
-
+/**
+ * Interface PersonalizedTraitInterface
+ *
+ * @package DigitalVirgo\MTSP\Model\Message
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model\Message;
 
 /**
  * Interface PersonalizedTraitInterface
- * @package DigitalVirgo\MTSP\Model\Message
  */
 interface PersonalizedTraitInterface
 {

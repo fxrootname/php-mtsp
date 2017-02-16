@@ -1,13 +1,14 @@
 <?php
-
+/**
+ * Class BilledStatus
+ *
+ * @package DigitalVirgo\MTSP\Model\Enum
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model\Enum;
 
 /**
  * Class BilledStatus
- * @package DigitalVirgo\MTSP\Model\Enum
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 class BilledStatus extends EnumAbstract
 {

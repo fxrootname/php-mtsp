@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Class BilledMsisdnsPack
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model;
 
 use DigitalVirgo\MTSP\Model\Enum\BilledStatus;
@@ -8,10 +13,6 @@ use DigitalVirgo\MTSP\Model\Enum\ServiceType;
 
 /**
  * Class BilledMsisdnsPack
- * @package DigitalVirgo\MTSP\Model
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 class BilledMsisdnsPack extends ModelAbstract implements \ArrayAccess, \Iterator
 {
@@ -299,6 +300,8 @@ class BilledMsisdnsPack extends ModelAbstract implements \ArrayAccess, \Iterator
     }
 
     /**
+     * Return Dom Map for parser
+     *
      * @return array
      */
     protected function _getDomMap()

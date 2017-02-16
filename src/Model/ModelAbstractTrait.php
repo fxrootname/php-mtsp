@@ -1,13 +1,14 @@
 <?php
-
+/**
+ * Class ModelAbstractTrait
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model;
 
 /**
  * Class ModelAbstractTrait
- * @package DigitalVirgo\MTSP\Model
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 trait ModelAbstractTrait
 {

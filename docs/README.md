@@ -13,3 +13,17 @@ Client::getInstance()->setAuth('YOUR_LOGIN', 'YOUR_PASSWORD');
 6. [Get subscribers](6-get-subscribers.md)
 7. [Add new subscription](7-add-subscription.md)
 8. [Update existing subscription](8-update-subscription.md)
+
+### Class documentation
+
+[PHPDOC](phpdoc/README.md)
+
+#### Doc's generate
+```sh
+rm -rf ./out/*
+rm -rf ./docs/phpdoc/*
+
+cd vendor/bin
+./phpdoc -d ./../../src/ -t ./../../out --template="xml"
+./phpdocmd ../../out/structure.xml ./../../docs/phpdoc --index README.md
+```

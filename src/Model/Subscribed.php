@@ -1,13 +1,14 @@
 <?php
-
+/**
+ * Class Subscribed
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model;
 
 /**
  * Class Subscribed
- * @package DigitalVirgo\MTSP\Model
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 class Subscribed extends ModelAbstract
 {
@@ -62,6 +63,8 @@ class Subscribed extends ModelAbstract
     }
 
     /**
+     * Return Dom Map for parser
+     *
      * @return array
      */
     protected function _getDomMap()

@@ -1,13 +1,14 @@
 <?php
-
+/**
+ * Class SubscribedMsisdnsPack
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model;
 
 /**
  * Class SubscribedMsisdnsPack
- * @package DigitalVirgo\MTSP\Model
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 class SubscribedMsisdnsPack extends ModelAbstract implements \ArrayAccess, \Iterator
 {
@@ -185,6 +186,8 @@ class SubscribedMsisdnsPack extends ModelAbstract implements \ArrayAccess, \Iter
     }
 
     /**
+     * Return Dom Map for parser
+     *
      * @return array
      */
     protected function _getDomMap()

@@ -1,0 +1,46 @@
+API Index
+=========
+
+* DigitalVirgo
+    * DigitalVirgo\MTSP
+        * DigitalVirgo\MTSP\Model
+            * [SubscriberData](DigitalVirgo-MTSP-Model-SubscriberData.md)
+            * [Service](DigitalVirgo-MTSP-Model-Service.md)
+            * [BilledMsisdnsPack](DigitalVirgo-MTSP-Model-BilledMsisdnsPack.md)
+            * [Subscribed](DigitalVirgo-MTSP-Model-Subscribed.md)
+            * [ContentsTraitInterface](DigitalVirgo-MTSP-Model-ContentsTraitInterface.md)
+            * [BilledData](DigitalVirgo-MTSP-Model-BilledData.md)
+            * DigitalVirgo\MTSP\Model\Message
+                * [PersonalizedMms](DigitalVirgo-MTSP-Model-Message-PersonalizedMms.md)
+                * [WapPush](DigitalVirgo-MTSP-Model-Message-WapPush.md)
+                * [Sms](DigitalVirgo-MTSP-Model-Message-Sms.md)
+                * [PersonalizedTraitInterface](DigitalVirgo-MTSP-Model-Message-PersonalizedTraitInterface.md)
+                * [Mms](DigitalVirgo-MTSP-Model-Message-Mms.md)
+                    * [MmsPart](DigitalVirgo-MTSP-Model-Message-Mms-MmsPart.md)
+                * [PersonalizedSms](DigitalVirgo-MTSP-Model-Message-PersonalizedSms.md)
+                * [PersonalizedWapPush](DigitalVirgo-MTSP-Model-Message-PersonalizedWapPush.md)
+            * [SubscribedMsisdnsPack](DigitalVirgo-MTSP-Model-SubscribedMsisdnsPack.md)
+            * [Subscriptions](DigitalVirgo-MTSP-Model-Subscriptions.md)
+            * [Status](DigitalVirgo-MTSP-Model-Status.md)
+            * [ModelAbstract](DigitalVirgo-MTSP-Model-ModelAbstract.md)
+            * [Subscription](DigitalVirgo-MTSP-Model-Subscription.md)
+            * [ModelAbstractTraitInterface](DigitalVirgo-MTSP-Model-ModelAbstractTraitInterface.md)
+            * DigitalVirgo\MTSP\Model\Enum
+                * [BilledStatus](DigitalVirgo-MTSP-Model-Enum-BilledStatus.md)
+                * [OperatorCode](DigitalVirgo-MTSP-Model-Enum-OperatorCode.md)
+                * [SubscriptionStatus](DigitalVirgo-MTSP-Model-Enum-SubscriptionStatus.md)
+                * [ServiceStatus](DigitalVirgo-MTSP-Model-Enum-ServiceStatus.md)
+                * [EnumAbstract](DigitalVirgo-MTSP-Model-Enum-EnumAbstract.md)
+                * [ServiceType](DigitalVirgo-MTSP-Model-Enum-ServiceType.md)
+            * [Services](DigitalVirgo-MTSP-Model-Services.md)
+            * [Billed](DigitalVirgo-MTSP-Model-Billed.md)
+        * DigitalVirgo\MTSP\Service
+            * [Client](DigitalVirgo-MTSP-Service-Client.md)
+                * DigitalVirgo\MTSP\Service\Client\Exception
+                    * [UnauthorizedException](DigitalVirgo-MTSP-Service-Client-Exception-UnauthorizedException.md)
+                    * [MethodNotAllowedException](DigitalVirgo-MTSP-Service-Client-Exception-MethodNotAllowedException.md)
+                    * [BadRequestException](DigitalVirgo-MTSP-Service-Client-Exception-BadRequestException.md)
+                    * [NotFoundException](DigitalVirgo-MTSP-Service-Client-Exception-NotFoundException.md)
+        * DigitalVirgo\MTSP\Util
+            * [Helper](DigitalVirgo-MTSP-Util-Helper.md)
+

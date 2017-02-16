@@ -1,15 +1,16 @@
 <?php
-
+/**
+ * Class MmsPart
+ *
+ * @package DigitalVirgo\MTSP\Model\Message\Mms
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model\Message\Mms;
 
 use \DigitalVirgo\MTSP\Model\ModelAbstract;
 
 /**
  * Class MmsPart
- * @package DigitalVirgo\MTSP\Model\Message\Mms
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 class MmsPart extends ModelAbstract
 {

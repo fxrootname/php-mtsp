@@ -1,7 +1,15 @@
 <?php
-
+/**
+ * Interface ModelAbstractTraitInterface
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model;
 
+/**
+ * Interface ModelAbstractTraitInterface
+ */
 interface ModelAbstractTraitInterface
 {
     /**

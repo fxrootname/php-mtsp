@@ -8,6 +8,10 @@
             "email": "adam.jurek@digitalvirgo.pl"
         }
     ],
+    "require-dev": {
+        "evert/phpdoc-md": "^0.2.0",
+        "phpdocumentor/phpdocumentor": "^2.9"
+    },
     "require": {
         "php": ">=5.5",
         "guzzlehttp/guzzle": "5.*",

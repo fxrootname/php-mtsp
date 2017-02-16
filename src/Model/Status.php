@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Class Status
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model;
 
 use DigitalVirgo\MTSP\Model\Enum\OperatorCode;
@@ -7,10 +12,6 @@ use DigitalVirgo\MTSP\Model\Enum\SubscriptionStatus;
 
 /**
  * Class Status
- * @package DigitalVirgo\MTSP\Model
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 class Status extends ModelAbstract
 {
@@ -68,6 +69,11 @@ class Status extends ModelAbstract
         return $this;
     }
 
+    /**
+     * Return Dom Map for parser
+     *
+     * @return array
+     */
     protected function _getDomMap()
     {
         return [

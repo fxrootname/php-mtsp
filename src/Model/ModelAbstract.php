@@ -1,14 +1,14 @@
 <?php
-
+/**
+ * Class ModelAbstract
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model;
 
 /**
- * Class ModelAbstract
- * @package DigitalVirgo\MTSP\Model
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
- * Abstract class for model providing xml serialization/deserialization
+ * Class ModelAbstract - Abstract class for model providing xml serialization/deserialization
  */
 abstract class ModelAbstract implements ModelAbstractTraitInterface
 {

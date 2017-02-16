@@ -1,16 +1,16 @@
 <?php
-
+/**
+ * Class PersonalizedTrait
+ *
+ * @package DigitalVirgo\MTSP\Model\Message
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model\Message;
 
 use DigitalVirgo\MTSP\Model\ModelAbstractTrait;
 
 /**
  * Class PersonalizedTrait
- * @package DigitalVirgo\MTSP\Model\Message
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
- *
  */
 trait PersonalizedTrait
 {

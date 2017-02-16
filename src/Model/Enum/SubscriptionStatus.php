@@ -1,13 +1,14 @@
 <?php
-
+/**
+ * Class SubscriptionStatus
+ *
+ * @package DigitalVirgo\MTSP\Model\Enum
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model\Enum;
 
 /**
  * Class SubscriptionStatus
- * @package DigitalVirgo\MTSP\Model\Enum
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 class SubscriptionStatus extends EnumAbstract
 {

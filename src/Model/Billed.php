@@ -1,7 +1,15 @@
 <?php
-
+/**
+ * Class Billed
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model;
 
+/**
+ * Class Billed - represents billed msisdn
+ */
 class Billed extends ModelAbstract
 {
     /**
@@ -98,6 +106,8 @@ class Billed extends ModelAbstract
 
 
     /**
+     * Return Dom Map for parser
+     *
      * @return array
      */
     protected function _getDomMap()

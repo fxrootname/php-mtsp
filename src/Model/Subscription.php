@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Class Subscription
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model;
 
 use DigitalVirgo\MTSP\Model\Enum\ServiceType;
@@ -7,10 +12,6 @@ use DigitalVirgo\MTSP\Service\Client;
 
 /**
  * Class Subscription
- * @package DigitalVirgo\MTSP\Model
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 class Subscription extends ModelAbstract implements ContentsTraitInterface
 {
@@ -260,8 +261,8 @@ class Subscription extends ModelAbstract implements ContentsTraitInterface
     }
 
     /**
-     * @param Status[]|array $status
-     * @return Subscription
+     * @param Status[]|array $statuses
+     * @return $this
      */
     public function setStatus(array $statuses)
     {
@@ -357,6 +358,8 @@ class Subscription extends ModelAbstract implements ContentsTraitInterface
     }
 
     /**
+     * Return Dom Map for parser
+     *
      * @return array
      */
     protected function _getDomMap()

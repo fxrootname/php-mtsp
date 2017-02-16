@@ -1,10 +1,18 @@
 <?php
-
+/**
+ * Class Helper
+ *
+ * @package DigitalVirgo\MTSP\Util
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Util;
 
 use DigitalVirgo\MTSP\Model\Service;
 use Cron\CronExpression;
 
+/**
+ * Class Helper
+ */
 class Helper
 {
     /**
@@ -86,6 +94,12 @@ class Helper
         return $nextExecution;
     }
 
+    /**
+     * Validate if message contains allowed characters
+     *
+     * @param $text
+     * @return bool
+     */
     public static function isMessageTextValid($text)
     {
         if (empty($text)) {

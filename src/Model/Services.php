@@ -1,13 +1,14 @@
 <?php
-
+/**
+ * Class Services
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model;
 
 /**
  * Class Services
- * @package DigitalVirgo\MTSP\Model
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 class Services extends ModelAbstract implements \ArrayAccess, \Iterator
 {
@@ -111,6 +112,8 @@ class Services extends ModelAbstract implements \ArrayAccess, \Iterator
     }
 
     /**
+     * Return Dom Map for parser
+     *
      * @return array
      */
     protected function _getDomMap()

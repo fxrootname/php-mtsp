@@ -1,13 +1,15 @@
 <?php
-
+/**
+ * Class SubscriberData
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ *
+ */
 namespace DigitalVirgo\MTSP\Model;
 
 /**
  * Class SubscriberData
- * @package DigitalVirgo\MTSP\Model
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 class SubscriberData extends ModelAbstract
 {
@@ -17,6 +19,8 @@ class SubscriberData extends ModelAbstract
     protected $_subscribedMsisdnsPack;
 
     /**
+     * Get array of SubscribedMsisdnsPack's
+     *
      * @return SubscribedMsisdnsPack[]
      */
     public function getSubscribedMsisdnsPack()
@@ -25,6 +29,8 @@ class SubscriberData extends ModelAbstract
     }
 
     /**
+     * Set SubscribedMsisdnsPack's
+     *
      * @param SubscribedMsisdnsPack[] $subscribedMsisdnsPack
      * @return SubscriberData
      */
@@ -49,6 +55,8 @@ class SubscriberData extends ModelAbstract
     }
 
     /**
+     * Add new SubscribedMsisdnsPack
+     *
      * @param $subscribedMsisdnsPack
      * @return $this
      */
@@ -64,6 +72,8 @@ class SubscriberData extends ModelAbstract
     }
 
     /**
+     * Return Dom Map for parser
+     *
      * @return array
      */
     protected function _getDomMap()

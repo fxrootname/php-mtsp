@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Class Mms
+ *
+ * @package DigitalVirgo\MTSP\Model\Message
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model\Message;
 
 use DigitalVirgo\MTSP\Model\ModelAbstract;
@@ -8,10 +13,6 @@ use DigitalVirgo\MTSP\Util\Helper;
 
 /**
  * Class Mms
- * @package DigitalVirgo\MTSP\Model\Message
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 class Mms extends ModelAbstract
 {

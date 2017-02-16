@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Class Service
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model;
 
 use DigitalVirgo\MTSP\Model\Enum\ServiceStatus;
@@ -9,10 +14,6 @@ use DigitalVirgo\MTSP\Util\Helper;
 
 /**
  * Class Service
- * @package DigitalVirgo\MTSP\Model
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 class Service extends ModelAbstract
 {
@@ -277,6 +278,11 @@ class Service extends ModelAbstract
         return $client->getSubscriptions($this->getServiceName(), $from, $to, $raw);
     }
 
+    /**
+     * Return Dom Map for parser
+     *
+     * @return array
+     */
     protected function _getDomMap()
     {
         return [

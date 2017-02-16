@@ -1,13 +1,14 @@
 <?php
-
+/**
+ * Class OperatorCode
+ *
+ * @package DigitalVirgo\MTSP\Model\Enum
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model\Enum;
 
 /**
- * Class OperatorCode
- * @package DigitalVirgo\MTSP\Model\Enum
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
+ * Class OperatorCode - Contains operator prefixes
  */
 class OperatorCode extends EnumAbstract
 {

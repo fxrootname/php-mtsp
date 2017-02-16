@@ -1,15 +1,16 @@
 <?php
-
+/**
+ * Class ContentsTrait
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model;
 
 use DigitalVirgo\MTSP\Model\Message;
 
 /**
  * Class ContentsTrait
- * @package DigitalVirgo\MTSP\Model
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 trait ContentsTrait
 {
@@ -178,6 +179,8 @@ trait ContentsTrait
     }
 
     /**
+     * Return Dom Map for parser
+     *
      * @return array
      */
     protected function _getDomMap()

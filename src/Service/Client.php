@@ -1,4 +1,10 @@
 <?php
+/**
+ * Class Client
+ *
+ * @package DigitalVirgo\MTSP\Service
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Service;
 
 use DigitalVirgo\MTSP\Model\BilledData;
@@ -17,34 +23,36 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Stream\Stream;
 
 /**
- * Class Client
- * @package DigitalVirgo\MTSP\Service
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
+ * Class Client - Provice pi methods
  */
 class Client extends GuzzleClient {
 
     const API_URL = 'http://mtserviceproxy.services.avantis.pl/';
 
     /**
+     * Instance for singleton
+     *
      * @var Client
      */
     private static $_instance = null;
 
     /**
+     * Username for auth
+     *
      * @var string
      */
     protected $_username;
 
     /**
+     * Password for auth
+     *
      * @var string
      */
     protected $_password;
 
     /**
      * Get new instance of client
-     * @param string $baseUrl api base url
+     *
      * @return Client
      */
     public static function getInstance()
@@ -58,8 +66,10 @@ class Client extends GuzzleClient {
     }
 
     /**
-     * @param $login
-     * @param $password
+     * Set authorization credentials
+     *
+     * @param string $username
+     * @param string $password
      * @return $this
      */
     public function setAuth($username, $password)
@@ -73,6 +83,8 @@ class Client extends GuzzleClient {
     }
 
     /**
+     * Get current username
+     *
      * @return string
      */
     public function getUsername()
@@ -81,8 +93,10 @@ class Client extends GuzzleClient {
     }
 
     /**
+     * Set username for Auth
+     *
      * @param string $username
-     * @return Client
+     * @return $this
      */
     public function setUsername($username)
     {
@@ -93,6 +107,8 @@ class Client extends GuzzleClient {
 
 
     /**
+     * Get current password
+     *
      * @return string
      */
     public function getPassword()
@@ -101,6 +117,8 @@ class Client extends GuzzleClient {
     }
 
     /**
+     * Set password for Auth
+     *
      * @param string $password
      * @return Client
      */
@@ -113,6 +131,7 @@ class Client extends GuzzleClient {
 
     /**
      * Setup basic auth
+     *
      * @return $this
      */
     protected function _configureAuth()
@@ -126,6 +145,7 @@ class Client extends GuzzleClient {
 
     /**
      * Send http request
+     *
      * @param string $url Request path
      * @param string $method Http method
      * @param mixed $payload Data to send with request
@@ -193,6 +213,7 @@ class Client extends GuzzleClient {
 
     /**
      * Get Services in xml format
+     *
      * @param bool $raw return raw xml output
      * @return Services|string
      */
@@ -209,6 +230,7 @@ class Client extends GuzzleClient {
 
     /**
      * Get service by name
+     *
      * @param $serviceName Service name
      * @param bool $raw return raw xml output
      * @return Service
@@ -226,11 +248,13 @@ class Client extends GuzzleClient {
 
     /**
      * Get subscriptions for service
+     *
      * @param string $serviceName Service name
      * @param null|string|\DateTime $from Optional date from filter
      * @param null|string|\DateTime $to Optional date to filter
      * @param bool $raw return raw xml output
-     * @return Subscriptions
+     * @return Subscriptions|string
+     * @throws \Exception
      */
     public function getSubscriptions($serviceName, $from = null, $to = null, $raw = false) {
 
@@ -267,6 +291,7 @@ class Client extends GuzzleClient {
 
     /**
      * Get single subscription
+     *
      * @param $serviceName
      * @param $subscriptionId
      * @param bool $raw return raw xml output
@@ -284,6 +309,7 @@ class Client extends GuzzleClient {
 
     /**
      * Get billed numbers report for subscription
+     *
      * @param string $serviceName Service Name
      * @param int|string $subscriptionId Subscription id
      * @param bool $raw
@@ -303,6 +329,7 @@ class Client extends GuzzleClient {
 
     /**
      * Get subscribers for service
+     *
      * @param $serviceName
      * @param null $operator
      * @param bool $raw return raw xml output
@@ -321,6 +348,7 @@ class Client extends GuzzleClient {
 
     /**
      * Creating new subscription
+     *
      * @param Subscription|array $subscription Subscription data
      * @param bool $raw return raw xml response
      * @return Subscription|string
@@ -355,6 +383,7 @@ class Client extends GuzzleClient {
 
     /**
      * Update Subscription
+     *
      * @param Subscription|array $subscription Subscription data
      * @param bool $raw return raw xml output
      * @return Subscription|string

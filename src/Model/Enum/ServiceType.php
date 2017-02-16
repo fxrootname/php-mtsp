@@ -1,13 +1,14 @@
 <?php
-
+/**
+ * Class ServiceType
+ *
+ * @package DigitalVirgo\MTSP\Model\Enum
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model\Enum;
 
 /**
  * Class ServiceType
- * @package DigitalVirgo\MTSP\Model\Enum
- *
- * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
- *
  */
 class ServiceType extends EnumAbstract
 {
