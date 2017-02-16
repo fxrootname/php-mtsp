@@ -18,12 +18,13 @@
    
    $client = Client::getInstance();
    
-   /** @var $service \DigitalVirgo\MTSP\Model\Subscriptions */
+   /** @var $subscriptions \DigitalVirgo\MTSP\Model\Subscriptions */
    $subscriptions = $client->getSubscriptions('SOME_SERVICE_1');
+   $subscriptions = $client->getSubscriptions('SOME_SERVICE_1', new \DateTime(), '2017-01-01');
 ```
      
 ### Output
-```
+```text
 object(DigitalVirgo\MTSP\Model\Subscriptions)#23 (1) {
   ["_subscription":protected]=>
   array(3) {

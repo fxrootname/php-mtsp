@@ -24,7 +24,7 @@ foreach ($servicesNames as $serviceName) {
 ```
 
 ### Output
-```
+```text
 object(DigitalVirgo\MTSP\Model\Services)#30 (1) {                                                                                  
  ["_name":protected]=>                                                                                                            
  array(13) {                                                                                                                      

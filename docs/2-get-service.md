@@ -21,7 +21,7 @@
 ```
 
 ### Output
-```
+```text
 object(DigitalVirgo\MTSP\Model\Service)#23 (10) {
   ["_active":protected]=>
   bool(true)
