@@ -4,6 +4,7 @@ namespace DigitalVirgo\MTSP\Service;
 use DigitalVirgo\MTSP\Model\ModelAbstractTraitInterface;
 use DigitalVirgo\MTSP\Model\Service;
 use DigitalVirgo\MTSP\Model\Services;
+use DigitalVirgo\MTSP\Model\SubscriberData;
 use DigitalVirgo\MTSP\Model\Subscriptions;
 use DigitalVirgo\MTSP\Model\Subscription;
 use DigitalVirgo\MTSP\Service\Client\Exception\BadRequestException;
@@ -286,9 +287,22 @@ class Client extends GuzzleClient {
         return $this->_request("services/{$serviceName}/subscriptions/{$subscriptionId}/billing", "GET", $payload);
     }
 
+    /**
+     * Get subscribers for service
+     * @param $serviceName
+     * @param null $operator
+     * @param bool $raw
+     * @return SubscriberData|string
+     */
     public function getSubscribers($serviceName, $operator = null, $raw = false) {
 
-        return $this->_request("services/{$serviceName}/subscribers/{$operator}");
+        $response = $this->_request("services/{$serviceName}/subscribers/{$operator}");
+
+        if ($raw) {
+            return $response;
+        }
+
+        return (new SubscriberData())->fromXml($response);
     }
 
     /**
@@ -350,8 +364,6 @@ class Client extends GuzzleClient {
 
         //update existing subscription
         $subscription->fromXml($response);
-
-
 
         if ($raw) {
             return $response;
