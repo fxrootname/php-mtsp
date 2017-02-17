@@ -27,6 +27,6 @@ If you are using Composer use autoload functionality:
 include "vendor/autoload.php";
 ```
 
-Now you can you library in your application
+Now you can use library in your application
 
 ## [Usage](docs/)
