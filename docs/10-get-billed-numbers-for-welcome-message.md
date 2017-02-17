@@ -1,13 +1,13 @@
 ## Get billed numbers for subscription
 
 ### Method
-`getBilledNumbers`
+`getWelcomeMessage`
 
 ### Parameters
-`getBilledNumbers($serviceName, $subscriptionId, $raw = false)`
+`getWelcomeMessageBilledNumbers($serviceName, $id = null, $raw = false)`
 
 1. `$serviceName` service name
-2. `$subscriptionId` id of subscription to fetch
+2. `$id` id (optional) is a first msisdn from a list to retrieve
 3. `$raw` return raw Xml response instead of Model Object, default `false`
 
 ### Example
@@ -18,7 +18,7 @@
    $client = Client::getInstance();
    
    /** @var $billed \DigitalVirgo\MTSP\Model\BilledData */
-   $billed = $client->getBilledNumbers('SOME_SERVICE_1', 12345);
+   $billed = $client->getWelcomeMessageBilledNumbers('SOME_SERVICE_1', 3);
 ```
         
 ### Output

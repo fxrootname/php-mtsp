@@ -435,16 +435,38 @@ class Client extends GuzzleClient {
         return (new WelcomeMessage())->fromXml($response);
     }
 
+    /**
+     * Get billed numbers for welcome message
+     *
+     * @param $serviceName Service name
+     * @param null $id
+     * @param bool $raw return raw xml output
+     * @return BilledData|string
+     */
+    public function getWelcomeMessageBilledNumbers($serviceName, $id = null, $raw = false)
+    {
+
+        $payload = [];
+
+        if ($id !== null) {
+            $payload['id'] = $id;
+        }
+
+        $response = $this->_request("services/{$serviceName}/welcome/billing", "GET", $payload);
+
+        if ($raw) {
+            return $response;
+        }
+
+        return (new BilledData())->fromXml($response);
+    }
+
     /*
     public function setWelcomeMessage($serviceName, $message, $raw = false)
     {
 
     }
 
-    public function getWelcomeMessageBilledNumbers($serviceName, $id = null, $raw = false)
-    {
-
-    }
 
     public function hlr($msisdn, $raw = false)
     {

@@ -342,3 +342,21 @@ Gets welcome message for service
 * $raw **boolean** - &lt;p&gt;return raw xml output&lt;/p&gt;
 
 
+
+### getWelcomeMessageBilledNumbers
+
+    \DigitalVirgo\MTSP\Model\BilledData|string DigitalVirgo\MTSP\Service\Client::getWelcomeMessageBilledNumbers($serviceName, null $id, boolean $raw)
+
+Get billed numbers for welcome message
+
+
+
+* Visibility: **public**
+
+
+#### Arguments
+* $serviceName **mixed** - &lt;p&gt;Service name&lt;/p&gt;
+* $id **null**
+* $raw **boolean** - &lt;p&gt;return raw xml output&lt;/p&gt;
+
+

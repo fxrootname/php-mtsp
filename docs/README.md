@@ -14,6 +14,7 @@ Client::getInstance()->setAuth('YOUR_LOGIN', 'YOUR_PASSWORD');
 7. [Add new subscription](7-add-subscription.md)
 8. [Update existing subscription](8-update-subscription.md)
 9. [Get welcome message](9-get-welcome-message.md)
+10. [Get billed numbers for welcome message](10-get-billed-numbers-for-welcome-message.md)
 
 ### Class documentation
 
