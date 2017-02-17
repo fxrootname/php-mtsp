@@ -1,27 +1,32 @@
 {
-    "name": "digitalvirgo/mtsp",
-    "version": "0.1.0",
-    "description": "Official MT Service Proxy PHP Library provided by DigitalVirgo",
-    "type": "library",
-    "keywords": "api subscription mtsp sms",
-    "authors": [
-        {
-            "name": "Adam Jurek",
-            "email": "adam.jurek@digitalvirgo.pl"
-        }
-    ],
-    "require-dev": {
-        "evert/phpdoc-md": "^0.2.0",
-        "phpdocumentor/phpdocumentor": "^2.9"
-    },
-    "require": {
-        "php": ">=5.5",
-        "guzzlehttp/guzzle": "5.*",
-        "mtdowling/cron-expression": "^1.2"
-    },
-    "autoload": {
-        "psr-4": {
-            "DigitalVirgo\\MTSP\\": "src/"
-        }
+  "name": "digitalvirgo/mtsp",
+  "version": "0.1.0",
+  "description": "Official MT Service Proxy PHP Library provided by DigitalVirgo",
+  "type": "library",
+  "keywords": [
+    "api",
+    "subscription",
+    "mtsp",
+    "sms"
+  ],
+  "authors": [
+    {
+      "name": "Adam Jurek",
+      "email": "adam.jurek@digitalvirgo.pl"
     }
+  ],
+  "require-dev": {
+    "evert/phpdoc-md": "^0.2.0",
+    "phpdocumentor/phpdocumentor": "^2.9"
+  },
+  "require": {
+    "php": ">=5.5",
+    "guzzlehttp/guzzle": "5.*",
+    "mtdowling/cron-expression": "^1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "DigitalVirgo\\MTSP\\": "src/"
+    }
+  }
 }
