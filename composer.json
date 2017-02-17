@@ -1,7 +1,9 @@
 {
     "name": "digitalvirgo/mtsp",
     "version": "0.1.0",
+    "description": "Official MT Service Proxy PHP Library provided by DigitalVirgo",
     "type": "library",
+    "keywords": "api subscription mtsp sms",
     "authors": [
         {
             "name": "Adam Jurek",
