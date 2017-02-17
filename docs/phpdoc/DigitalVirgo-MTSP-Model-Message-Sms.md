@@ -9,7 +9,7 @@ Class Sms
 * Class name: Sms
 * Namespace: DigitalVirgo\MTSP\Model\Message
 * Parent class: [DigitalVirgo\MTSP\Model\ModelAbstract](DigitalVirgo-MTSP-Model-ModelAbstract.md)
-
+* This class implements: [DigitalVirgo\MTSP\Model\Message\ContentsInterface](DigitalVirgo-MTSP-Model-Message-ContentsInterface.md)
 
 
 

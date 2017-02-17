@@ -14,6 +14,7 @@ use DigitalVirgo\MTSP\Model\Services;
 use DigitalVirgo\MTSP\Model\SubscriberData;
 use DigitalVirgo\MTSP\Model\Subscriptions;
 use DigitalVirgo\MTSP\Model\Subscription;
+use DigitalVirgo\MTSP\Model\WelcomeMessage;
 use DigitalVirgo\MTSP\Service\Client\Exception\BadRequestException;
 use DigitalVirgo\MTSP\Service\Client\Exception\MethodNotAllowedException;
 use DigitalVirgo\MTSP\Service\Client\Exception\NotFoundException;
@@ -415,5 +416,45 @@ class Client extends GuzzleClient {
         return $subscription;
 
     }
+
+    /**
+     * Gets welcome message for service
+     *
+     * @param $serviceName Service name
+     * @param bool $raw return raw xml output
+     * @return WelcomeMessage|string
+     */
+    public function getWelcomeMessage($serviceName, $raw = false)
+    {
+        $response = $this->_request("services/{$serviceName}/welcome");
+
+        if ($raw) {
+            return $response;
+        }
+
+        return (new WelcomeMessage())->fromXml($response);
+    }
+
+    /*
+    public function setWelcomeMessage($serviceName, $message, $raw = false)
+    {
+
+    }
+
+    public function getWelcomeMessageBilledNumbers($serviceName, $id = null, $raw = false)
+    {
+
+    }
+
+    public function hlr($msisdn, $raw = false)
+    {
+
+    }
+
+    public function hlrExtended($msissdn, $raw = false)
+    {
+
+    }
+    */
 
 }

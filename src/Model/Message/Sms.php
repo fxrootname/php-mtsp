@@ -13,7 +13,7 @@ use DigitalVirgo\MTSP\Util\Helper;
 /**
  * Class Sms
  */
-class Sms extends ModelAbstract
+class Sms extends ModelAbstract implements ContentsInterface
 {
     /**
      * @var string

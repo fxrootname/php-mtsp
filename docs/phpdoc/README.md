@@ -4,20 +4,24 @@ API Index
 * DigitalVirgo
     * DigitalVirgo\MTSP
         * DigitalVirgo\MTSP\Model
+            * [WelcomeMessage](DigitalVirgo-MTSP-Model-WelcomeMessage.md)
             * [SubscriberData](DigitalVirgo-MTSP-Model-SubscriberData.md)
             * [Service](DigitalVirgo-MTSP-Model-Service.md)
             * [BilledMsisdnsPack](DigitalVirgo-MTSP-Model-BilledMsisdnsPack.md)
             * [Subscribed](DigitalVirgo-MTSP-Model-Subscribed.md)
+            * [WelcomeMessageStatus](DigitalVirgo-MTSP-Model-WelcomeMessageStatus.md)
             * [ContentsTraitInterface](DigitalVirgo-MTSP-Model-ContentsTraitInterface.md)
             * [BilledData](DigitalVirgo-MTSP-Model-BilledData.md)
             * DigitalVirgo\MTSP\Model\Message
                 * [PersonalizedMms](DigitalVirgo-MTSP-Model-Message-PersonalizedMms.md)
                 * [WapPush](DigitalVirgo-MTSP-Model-Message-WapPush.md)
                 * [Sms](DigitalVirgo-MTSP-Model-Message-Sms.md)
+                * [ContentCreatorTraitInterface](DigitalVirgo-MTSP-Model-Message-ContentCreatorTraitInterface.md)
                 * [PersonalizedTraitInterface](DigitalVirgo-MTSP-Model-Message-PersonalizedTraitInterface.md)
                 * [Mms](DigitalVirgo-MTSP-Model-Message-Mms.md)
                     * [MmsPart](DigitalVirgo-MTSP-Model-Message-Mms-MmsPart.md)
                 * [PersonalizedSms](DigitalVirgo-MTSP-Model-Message-PersonalizedSms.md)
+                * [ContentsInterface](DigitalVirgo-MTSP-Model-Message-ContentsInterface.md)
                 * [PersonalizedWapPush](DigitalVirgo-MTSP-Model-Message-PersonalizedWapPush.md)
             * [SubscribedMsisdnsPack](DigitalVirgo-MTSP-Model-SubscribedMsisdnsPack.md)
             * [Subscriptions](DigitalVirgo-MTSP-Model-Subscriptions.md)
@@ -28,7 +32,9 @@ API Index
             * DigitalVirgo\MTSP\Model\Enum
                 * [BilledStatus](DigitalVirgo-MTSP-Model-Enum-BilledStatus.md)
                 * [OperatorCode](DigitalVirgo-MTSP-Model-Enum-OperatorCode.md)
+                * [WelcomeMessageStatus](DigitalVirgo-MTSP-Model-Enum-WelcomeMessageStatus.md)
                 * [SubscriptionStatus](DigitalVirgo-MTSP-Model-Enum-SubscriptionStatus.md)
+                * [WelcomeMessageType](DigitalVirgo-MTSP-Model-Enum-WelcomeMessageType.md)
                 * [ServiceStatus](DigitalVirgo-MTSP-Model-Enum-ServiceStatus.md)
                 * [EnumAbstract](DigitalVirgo-MTSP-Model-Enum-EnumAbstract.md)
                 * [ServiceType](DigitalVirgo-MTSP-Model-Enum-ServiceType.md)

@@ -13,7 +13,7 @@ use DigitalVirgo\MTSP\Util\Helper;
 /**
  * Class WapPush
  */
-class WapPush extends ModelAbstract
+class WapPush extends ModelAbstract implements ContentsInterface
 {
     /**
      * @var string

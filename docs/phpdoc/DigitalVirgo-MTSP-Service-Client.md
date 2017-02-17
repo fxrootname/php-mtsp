@@ -325,3 +325,20 @@ Update Subscription
 * $raw **boolean** - &lt;p&gt;return raw xml output&lt;/p&gt;
 
 
+
+### getWelcomeMessage
+
+    \DigitalVirgo\MTSP\Model\WelcomeMessage|string DigitalVirgo\MTSP\Service\Client::getWelcomeMessage($serviceName, boolean $raw)
+
+Gets welcome message for service
+
+
+
+* Visibility: **public**
+
+
+#### Arguments
+* $serviceName **mixed** - &lt;p&gt;Service name&lt;/p&gt;
+* $raw **boolean** - &lt;p&gt;return raw xml output&lt;/p&gt;
+
+

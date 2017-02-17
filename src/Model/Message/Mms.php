@@ -14,7 +14,7 @@ use DigitalVirgo\MTSP\Util\Helper;
 /**
  * Class Mms
  */
-class Mms extends ModelAbstract
+class Mms extends ModelAbstract implements ContentsInterface
 {
     /**
      * @var MmsPart[]

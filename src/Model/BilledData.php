@@ -84,7 +84,7 @@ class BilledData extends ModelAbstract
      */
     public function setEndFlag($endFlag)
     {
-        $this->_endFlag = $endFlag;
+        $this->_endFlag = filter_var($endFlag, FILTER_VALIDATE_BOOLEAN);
         return $this;
     }
 
