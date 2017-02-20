@@ -1,13 +1,19 @@
 <?php
-
+/**
+ * Class Hlr
+ *
+ * @package DigitalVirgo\MTSP\Model
+ * @author Adam Jurek <adam.jurek@digitalvirgo.pl>
+ */
 namespace DigitalVirgo\MTSP\Model;
-
 
 use DigitalVirgo\MTSP\Model\Enum\OperatorCode;
 
+/**
+ * Class Hlr
+ */
 class Hlr extends ModelAbstract
 {
-
 
     /**
      * @var string

@@ -1,7 +1,7 @@
 DigitalVirgo\MTSP\Model\Hlr
 ===============
 
-Class ModelAbstract - Abstract class for model providing xml serialization/deserialization
+Class Hlr
 
 
 

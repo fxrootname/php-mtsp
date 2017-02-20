@@ -16,7 +16,7 @@ or manualy update composer.json
 ...
     "require": {
         ...
-        "digitalvirgo/mtsp":"0.1.0"
+        "digitalvirgo/mtsp":"0.2.0"
     }
 }
 ```
