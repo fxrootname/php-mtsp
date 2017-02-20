@@ -173,6 +173,9 @@ class Client extends GuzzleClient {
             case 'POST':
             case 'PUT':
                 if ($payload instanceof ModelAbstractTraitInterface) {
+
+//                    var_dump($payload->toXml(true));
+
                     $options['body'] = Stream::factory($payload->toXml());
                     $options['headers']['Content-type'] = 'application/xml';
                 } else {
@@ -397,7 +400,7 @@ class Client extends GuzzleClient {
 
         $serviceName = $subscription->getServiceName();
 
-        if (!$subscription->getServiceName()) {
+        if (!$serviceName) {
             throw new \Exception('Missing serviceName in subscription');
         }
 
@@ -461,11 +464,44 @@ class Client extends GuzzleClient {
         return (new BilledData())->fromXml($response);
     }
 
-    /*
-    public function setWelcomeMessage($serviceName, $message, $raw = false)
-    {
 
+    /**
+     * Create or update welcome message for service
+     *
+     * @param WelcomeMessage|array $message Message to set
+     * @param bool $raw return raw xml output
+     * @return WelcomeMessage|string
+     */
+    public function setWelcomeMessage($message, $raw = false)
+    {
+        if (is_array($message)) {
+            $message = new WelcomeMessage($message);
+        }
+
+        $serviceName = $message->getServiceName();
+
+        if (!$serviceName) {
+            throw new \Exception('Missing serviceName in message');
+        }
+
+        $clonedMessage = clone $message;
+
+        // clean no updateable data
+        $clonedMessage->cleanBeforeSave();
+
+        $response = $this->_request("services/{$serviceName}/welcome", "POST", $clonedMessage);
+
+        //update existing message
+        $message->fromXml($response);
+
+        if ($raw) {
+            return $response;
+        }
+
+        return $message;
     }
+
+
 
 
     public function hlr($msisdn, $raw = false)
@@ -477,6 +513,6 @@ class Client extends GuzzleClient {
     {
 
     }
-    */
+
 
 }

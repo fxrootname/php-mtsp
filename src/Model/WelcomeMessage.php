@@ -106,6 +106,7 @@ class WelcomeMessage extends ModelAbstract
     public function setStatuses($statuses)
     {
         if (is_array($statuses)) {
+            $this->_statuses = [];
 
             foreach ($statuses as $status) {
                 $this->addStatus($status);
@@ -129,6 +130,19 @@ class WelcomeMessage extends ModelAbstract
         }
 
         $this->_statuses[] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Cleans field that not allowed for update
+     * @return $this
+     */
+    public function cleanBeforeSave()
+    {
+        $this
+            ->setCreateDate(null)
+            ->setStatuses([]);
 
         return $this;
     }

@@ -31,6 +31,9 @@ class Services extends ModelAbstract implements \ArrayAccess, \Iterator
      */
     public function setName($name)
     {
+        if (!is_array($name)) {
+            $name = [$name];
+        }
         $this->_name = $name;
         return $this;
     }

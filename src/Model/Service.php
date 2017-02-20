@@ -295,7 +295,7 @@ class Service extends ModelAbstract
                 'id'            => 'id',
                 'sendLa'        => 'sendLa',
                 'serviceName'   => 'serviceName',
-                'serviceType'   > 'serviceType',
+                'serviceType'   => 'serviceType',
                 'serviceStatus' => 'serviceStatus'
             ]
         ];
