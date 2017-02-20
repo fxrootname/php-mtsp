@@ -1,6 +1,6 @@
 {
   "name": "digitalvirgo/mtsp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Official MT Service Proxy PHP Library provided by DigitalVirgo",
   "type": "library",
   "keywords": [
