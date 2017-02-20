@@ -264,6 +264,19 @@ Methods
 
 
 
+### cleanBeforeSave
+
+    \DigitalVirgo\MTSP\Model\WelcomeMessage DigitalVirgo\MTSP\Model\WelcomeMessage::cleanBeforeSave()
+
+Cleans field that not allowed for update
+
+
+
+* Visibility: **public**
+
+
+
+
 ### _getDomMap
 
     array DigitalVirgo\MTSP\Model\ModelAbstract::_getDomMap()

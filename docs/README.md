@@ -16,6 +16,7 @@ Client::getInstance()->setAuth('YOUR_LOGIN', 'YOUR_PASSWORD');
 9. [Get welcome message](9-get-welcome-message.md)
 10. [Get billed numbers for welcome message](10-get-billed-numbers-for-welcome-message.md)
 11. [Update/set welcome message](11-update-set-welcome-message.md)
+12. [Hlr information](12-hlr.md)
 
 ### Class documentation
 

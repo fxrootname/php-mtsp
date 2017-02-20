@@ -38,11 +38,13 @@ API Index
                 * [ServiceStatus](DigitalVirgo-MTSP-Model-Enum-ServiceStatus.md)
                 * [EnumAbstract](DigitalVirgo-MTSP-Model-Enum-EnumAbstract.md)
                 * [ServiceType](DigitalVirgo-MTSP-Model-Enum-ServiceType.md)
+            * [Hlr](DigitalVirgo-MTSP-Model-Hlr.md)
             * [Services](DigitalVirgo-MTSP-Model-Services.md)
             * [Billed](DigitalVirgo-MTSP-Model-Billed.md)
         * DigitalVirgo\MTSP\Service
             * [Client](DigitalVirgo-MTSP-Service-Client.md)
                 * DigitalVirgo\MTSP\Service\Client\Exception
+                    * [ForbiddenException](DigitalVirgo-MTSP-Service-Client-Exception-ForbiddenException.md)
                     * [UnauthorizedException](DigitalVirgo-MTSP-Service-Client-Exception-UnauthorizedException.md)
                     * [MethodNotAllowedException](DigitalVirgo-MTSP-Service-Client-Exception-MethodNotAllowedException.md)
                     * [BadRequestException](DigitalVirgo-MTSP-Service-Client-Exception-BadRequestException.md)

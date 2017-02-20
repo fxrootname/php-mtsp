@@ -8,6 +8,7 @@
 namespace DigitalVirgo\MTSP\Service;
 
 use DigitalVirgo\MTSP\Model\BilledData;
+use DigitalVirgo\MTSP\Model\Hlr;
 use DigitalVirgo\MTSP\Model\ModelAbstractTraitInterface;
 use DigitalVirgo\MTSP\Model\Service;
 use DigitalVirgo\MTSP\Model\Services;
@@ -16,6 +17,7 @@ use DigitalVirgo\MTSP\Model\Subscriptions;
 use DigitalVirgo\MTSP\Model\Subscription;
 use DigitalVirgo\MTSP\Model\WelcomeMessage;
 use DigitalVirgo\MTSP\Service\Client\Exception\BadRequestException;
+use DigitalVirgo\MTSP\Service\Client\Exception\ForbiddenException;
 use DigitalVirgo\MTSP\Service\Client\Exception\MethodNotAllowedException;
 use DigitalVirgo\MTSP\Service\Client\Exception\NotFoundException;
 use DigitalVirgo\MTSP\Service\Client\Exception\UnauthorizedException;
@@ -26,7 +28,8 @@ use GuzzleHttp\Stream\Stream;
 /**
  * Class Client - Provice pi methods
  */
-class Client extends GuzzleClient {
+class Client extends GuzzleClient
+{
 
     const API_URL = 'http://mtserviceproxy.services.avantis.pl/';
 
@@ -157,7 +160,8 @@ class Client extends GuzzleClient {
      * @throws UnauthorizedException
      * @throws \Exception
      */
-    protected function _request($url, $method = 'GET', $payload = null) {
+    protected function _request($url, $method = 'GET', $payload = null)
+    {
 
         $options = [];
 
@@ -197,6 +201,9 @@ class Client extends GuzzleClient {
                 case 401:
                     throw new UnauthorizedException();
                     break;
+                case 403:
+                    throw new ForbiddenException();
+                    break;
                 case 404:
                     throw new NotFoundException();
                     break;
@@ -212,7 +219,7 @@ class Client extends GuzzleClient {
         /** @var \GuzzleHttp\Stream\Stream $body */
         $body = $response->getBody();
 
-        return (string) $body;
+        return (string)$body;
     }
 
     /**
@@ -221,7 +228,8 @@ class Client extends GuzzleClient {
      * @param bool $raw return raw xml output
      * @return Services|string
      */
-    public function getServicesNames($raw = false) {
+    public function getServicesNames($raw = false)
+    {
 
         $response = $this->_request("services");
 
@@ -239,7 +247,8 @@ class Client extends GuzzleClient {
      * @param bool $raw return raw xml output
      * @return Service
      */
-    public function getService($serviceName, $raw = false) {
+    public function getService($serviceName, $raw = false)
+    {
 
         $response = $this->_request("services/{$serviceName}");
 
@@ -260,7 +269,8 @@ class Client extends GuzzleClient {
      * @return Subscriptions|string
      * @throws \Exception
      */
-    public function getSubscriptions($serviceName, $from = null, $to = null, $raw = false) {
+    public function getSubscriptions($serviceName, $from = null, $to = null, $raw = false)
+    {
 
         if ($from xor $to) {
             throw new \Exception('Both dates are required');
@@ -301,7 +311,8 @@ class Client extends GuzzleClient {
      * @param bool $raw return raw xml output
      * @return Subscription
      */
-    public function getSubscription($serviceName, $subscriptionId, $raw = false) {
+    public function getSubscription($serviceName, $subscriptionId, $raw = false)
+    {
         $response = $this->_request("services/{$serviceName}/subscriptions/{$subscriptionId}");
 
         if ($raw) {
@@ -319,7 +330,8 @@ class Client extends GuzzleClient {
      * @param bool $raw
      * @return BilledData|string
      */
-    public function getBilledNumbers($serviceName, $subscriptionId, $raw = false) {
+    public function getBilledNumbers($serviceName, $subscriptionId, $raw = false)
+    {
         $response = $this->_request("services/{$serviceName}/subscriptions/{$subscriptionId}/billing", "GET");
 
 
@@ -339,7 +351,8 @@ class Client extends GuzzleClient {
      * @param bool $raw return raw xml output
      * @return SubscriberData|string
      */
-    public function getSubscribers($serviceName, $operator = null, $raw = false) {
+    public function getSubscribers($serviceName, $operator = null, $raw = false)
+    {
 
         $response = $this->_request("services/{$serviceName}/subscribers/{$operator}");
 
@@ -358,7 +371,8 @@ class Client extends GuzzleClient {
      * @return Subscription|string
      * @throws \Exception
      */
-    public function addSubscription($subscription, $raw = false) {
+    public function addSubscription($subscription, $raw = false)
+    {
         if (is_array($subscription)) {
             $subscription = new Subscription($subscription);
         }
@@ -393,7 +407,8 @@ class Client extends GuzzleClient {
      * @return Subscription|string
      * @throws \Exception
      */
-    public function updateSubscription($subscription, $raw = false) {
+    public function updateSubscription($subscription, $raw = false)
+    {
         if (is_array($subscription)) {
             $subscription = new Subscription($subscription);
         }
@@ -501,18 +516,40 @@ class Client extends GuzzleClient {
         return $message;
     }
 
-
-
-
+    /**
+     * Get operator code for Msisdn
+     *
+     * @param string $msisdn Msisdn to check
+     * @param bool $raw return raw xml output
+     * @return Hlr|string
+     */
     public function hlr($msisdn, $raw = false)
     {
+        $response = $this->_request("hlr/{$msisdn}");
 
+        if ($raw) {
+            return $response;
+        }
+
+        return (new Hlr())->fromXml($response);
     }
 
-    public function hlrExtended($msissdn, $raw = false)
+    /**
+     * Get extended msisdn data
+     *
+     * @param string $msisdn Msisdn to check
+     * @param bool $raw return raw xml output
+     * @return Hlr|string
+     */
+    public function hlrExtended($msisdn, $raw = false)
     {
+        $response = $this->_request("hlr/extended/{$msisdn}");
 
+        if ($raw) {
+            return $response;
+        }
+
+        return (new Hlr())->fromXml($response);
     }
-
 
 }

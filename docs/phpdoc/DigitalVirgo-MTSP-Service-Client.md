@@ -360,3 +360,54 @@ Get billed numbers for welcome message
 * $raw **boolean** - &lt;p&gt;return raw xml output&lt;/p&gt;
 
 
+
+### setWelcomeMessage
+
+    \DigitalVirgo\MTSP\Model\WelcomeMessage|string DigitalVirgo\MTSP\Service\Client::setWelcomeMessage(\DigitalVirgo\MTSP\Model\WelcomeMessage|array $message, boolean $raw)
+
+Create or update welcome message for service
+
+
+
+* Visibility: **public**
+
+
+#### Arguments
+* $message **[DigitalVirgo\MTSP\Model\WelcomeMessage](DigitalVirgo-MTSP-Model-WelcomeMessage.md)|array** - &lt;p&gt;Message to set&lt;/p&gt;
+* $raw **boolean** - &lt;p&gt;return raw xml output&lt;/p&gt;
+
+
+
+### hlr
+
+    \DigitalVirgo\MTSP\Model\Hlr|string DigitalVirgo\MTSP\Service\Client::hlr(string $msisdn, boolean $raw)
+
+Get operator code for Msisdn
+
+
+
+* Visibility: **public**
+
+
+#### Arguments
+* $msisdn **string** - &lt;p&gt;Msisdn to check&lt;/p&gt;
+* $raw **boolean** - &lt;p&gt;return raw xml output&lt;/p&gt;
+
+
+
+### hlrExtended
+
+    \DigitalVirgo\MTSP\Model\Hlr|string DigitalVirgo\MTSP\Service\Client::hlrExtended(string $msisdn, boolean $raw)
+
+Get extended msisdn data
+
+
+
+* Visibility: **public**
+
+
+#### Arguments
+* $msisdn **string** - &lt;p&gt;Msisdn to check&lt;/p&gt;
+* $raw **boolean** - &lt;p&gt;return raw xml output&lt;/p&gt;
+
+
