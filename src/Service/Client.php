@@ -31,7 +31,7 @@ use GuzzleHttp\Stream\Stream;
 class Client extends GuzzleClient
 {
 
-    const API_URL = 'http://mtserviceproxy.services.avantis.pl/';
+    const API_URL = 'https://mtserviceproxy.services.avantis.pl/';
 
     /**
      * Instance for singleton
@@ -53,6 +53,13 @@ class Client extends GuzzleClient
      * @var string
      */
     protected $_password;
+    
+    /**
+     * Auth credentials for request
+     *
+     * @var []
+     */
+    private $auth = [];
 
     /**
      * Get new instance of client
@@ -63,7 +70,7 @@ class Client extends GuzzleClient
     {
         if (null === static::$_instance) {
             static::$_instance = new static(array(
-                'base_url' => self::API_URL,
+                'base_uri' => self::API_URL,
             ));
         }
         return static::$_instance;
@@ -78,11 +85,7 @@ class Client extends GuzzleClient
      */
     public function setAuth($username, $password)
     {
-        $this->_username = $username;
-        $this->_password = $password;
-
-        $this->_configureAuth();
-
+        $this->auth = [ $username, $password ];
         return $this;
     }
 
@@ -105,7 +108,6 @@ class Client extends GuzzleClient
     public function setUsername($username)
     {
         $this->_username = $username;
-        $this->_configureAuth();
         return $this;
     }
 
@@ -140,9 +142,9 @@ class Client extends GuzzleClient
      */
     protected function _configureAuth()
     {
-        if ($this->_username && $this->_password) {
-            $this->setDefaultOption('auth', [$this->_username, $this->_password]);
-        }
+//         if ($this->_username && $this->_password) {
+//             $this->setDefaultOption('auth', [$this->_username, $this->_password]);
+//         }
 
         return $this;
     }
@@ -188,6 +190,11 @@ class Client extends GuzzleClient
                 break;
         }
 
+        if ( !isset( $options['auth'] ) && !empty( $this->auth ) ) {
+            // pass auth to request
+            $options['auth'] = $this->auth;
+        }
+        
         try {
             $response = $this->request($method, $url, $options);
         } catch (ClientException $e) {
